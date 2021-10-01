@@ -1,8 +1,15 @@
 package org.wit
 
+import models.MaterialModel
+import models.PrinterModel
+import models.UserModel
 import mu.KotlinLogging
 
 private val logger = KotlinLogging.logger {}
+
+val materials = ArrayList<MaterialModel>()
+val printers = ArrayList<PrinterModel>()
+val user = UserModel()
 
 fun main(args: Array<String>) {
     //logger.info { "Launching 3D Printing Price Calculator" }
@@ -46,18 +53,78 @@ fun menu() : Int {
     return option
 }
 
-fun addMaterial(){
-    println("Nice Material")
+fun addMaterial() {
+    var aMaterial = MaterialModel()
+    println("Add Material")
+    println()
+    print("Enter a Material Name : ")
+    aMaterial.materialName = readLine()!!
+
+    println("Add a Material Type")
+    println()
+    print("Enter a Material Type : ")
+    aMaterial.materialType = readLine()!!
+
+    println("Add Material Weight in Grams")
+    println()
+    print("Enter Material Weight : ")
+    aMaterial.materialWeight = readLine()?.toInt()!!
+
+    println("Add a Material Price")
+    println()
+    print("Enter a Material Price : ")
+    aMaterial.materialPrice = readLine()?.toDouble()!!
+
+    if(aMaterial.materialName.isNotEmpty() && aMaterial.materialType.isNotEmpty()) {
+        aMaterial.materialId = materials.size.toLong()
+        materials.add(aMaterial.copy())
+        logger.info("Material Added : [ $aMaterial ]")
+    }
+    else println("Material Not Added!!!")
+
 }
 
 fun addPrinter() {
-    println("Nice Printer")
+    var aPrinter = PrinterModel()
+    println("Add Printer")
+    println()
+    print("Enter a Printer Name : ")
+    aPrinter.printerName = readLine()!!
+
+    println("Add a Printer Price")
+    println()
+    print("Enter Printer Price : ")
+    aPrinter.printerPrice = readLine()?.toDouble()!!
+
+    println("Add Printers Power Usage")
+    println()
+    print("Enter Printers Power Usage in Watts : ")
+    aPrinter.wattUsage = readLine()?.toInt()!!
+
+    println("Add Printers Return on Investment")
+    println()
+    print("In How Many Months Do You Want To Repay The Printer : ")
+    aPrinter.investmentReturn = readLine()?.toInt()!!
+
+    if(aPrinter.printerName.isNotEmpty()) {
+        aPrinter.printerId = printers.size.toLong()
+        printers.add(aPrinter.copy())
+        logger.info("Printer Added : [ $aPrinter ]")
+    }
+    else println("Printer Not Added!!!")
+
 }
 
 fun listAllMaterials() {
-    println("Here is all your materials")
+    println("List All Materials")
+    println()
+    materials.forEach {logger.info("${it}")}
+    println()
 }
 
 fun listAllPrinters() {
-    println("Here is all your printers")
+    println("List All Printers")
+    println()
+    printers.forEach {logger.info("${it}")}
+    println()
 }
