@@ -72,15 +72,17 @@ fun addMaterial() {
     println("Add Material Weight in Grams")
     println()
     print("Enter Material Weight : ")
-    aMaterial.materialWeight = readLine()?.toInt()!!
+    var matWeight  = readLine()?.toInt()
 
     println("Add a Material Price")
     println()
     print("Enter a Material Price : ")
-    aMaterial.materialPrice = readLine()?.toDouble()!!
+    var matPrice = readLine()?.toDouble()
 
-    if(aMaterial.materialName.isNotEmpty() && aMaterial.materialType.isNotEmpty()) {
+    if(aMaterial.materialName.isNotEmpty() && aMaterial.materialType.isNotEmpty() && matWeight != null && matPrice != null) {
         aMaterial.materialId = materials.size.toLong()
+        aMaterial.materialWeight = matWeight
+        aMaterial.materialPrice = matPrice
         materials.add(aMaterial.copy())
         logger.info("Material Added : [ $aMaterial ]")
     }
