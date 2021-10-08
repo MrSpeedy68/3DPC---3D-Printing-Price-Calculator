@@ -1,11 +1,9 @@
 package views
 
 import models.MaterialModel
-import org.wit.*
 import MaterialMemStore
 
 class MaterialView {
-
 
     fun showMaterial(material: MaterialModel) {
         if(material != null)
@@ -15,23 +13,15 @@ class MaterialView {
     }
 
     fun addMaterialData(material : MaterialModel) : Boolean {
-        println("Add Material")
-        println()
         print("Enter a Material Name : ")
         material.materialName = readLine()!!
 
-        println("Add a Material Type")
-        println()
         print("Enter a Material Type : ")
         material.materialType = readLine()!!
 
-        println("Add Material Weight in Grams")
-        println()
         print("Enter Material Weight : ")
         material.materialWeight = readLine()?.toInt()!!
 
-        println("Add a Material Price")
-        println()
         print("Enter a Material Price : ")
         material.materialPrice = readLine()?.toDouble()!!
 
@@ -86,6 +76,4 @@ class MaterialView {
             -9
         return searchId
     }
-
-
 }
