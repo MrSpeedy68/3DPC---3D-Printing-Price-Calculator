@@ -1,15 +1,18 @@
 package org.wit
 
+import controllers.MaterialController
 import models.MaterialModel
 import models.PrinterModel
 import models.UserModel
 import mu.KotlinLogging
 
+
 private val logger = KotlinLogging.logger {}
 
-val materials = ArrayList<MaterialModel>()
 val printers = ArrayList<PrinterModel>()
 val user = UserModel()
+
+val materialController = MaterialController()
 
 fun main(args: Array<String>) {
     //logger.info { "Launching 3D Printing Price Calculator" }
@@ -27,6 +30,7 @@ fun main(args: Array<String>) {
             5 -> updateMaterial()
             6 -> updatePrinter()
             -1 -> println("Exiting App")
+            99 -> dummyMaterialData()
             else -> println("Invalid Option")
         }
         println()
@@ -58,35 +62,36 @@ fun menu() : Int {
 }
 
 fun addMaterial() {
-    var aMaterial = MaterialModel()
-    println("Add Material")
-    println()
-    print("Enter a Material Name : ")
-    aMaterial.materialName = readLine()!!
-
-    println("Add a Material Type")
-    println()
-    print("Enter a Material Type : ")
-    aMaterial.materialType = readLine()!!
-
-    println("Add Material Weight in Grams")
-    println()
-    print("Enter Material Weight : ")
-    var matWeight  = readLine()?.toInt()
-
-    println("Add a Material Price")
-    println()
-    print("Enter a Material Price : ")
-    var matPrice = readLine()?.toDouble()
-
-    if(aMaterial.materialName.isNotEmpty() && aMaterial.materialType.isNotEmpty() && matWeight != null && matPrice != null) {
-        aMaterial.materialId = materials.size.toLong()
-        aMaterial.materialWeight = matWeight
-        aMaterial.materialPrice = matPrice
-        materials.add(aMaterial.copy())
-        logger.info("Material Added : [ $aMaterial ]")
-    }
-    else println("Material Not Added!!!")
+    materialController.add()
+//    var aMaterial = MaterialModel()
+//    println("Add Material")
+//    println()
+//    print("Enter a Material Name : ")
+//    aMaterial.materialName = readLine()!!
+//
+//    println("Add a Material Type")
+//    println()
+//    print("Enter a Material Type : ")
+//    aMaterial.materialType = readLine()!!
+//
+//    println("Add Material Weight in Grams")
+//    println()
+//    print("Enter Material Weight : ")
+//    var matWeight  = readLine()?.toInt()
+//
+//    println("Add a Material Price")
+//    println()
+//    print("Enter a Material Price : ")
+//    var matPrice = readLine()?.toDouble()
+//
+//    if(aMaterial.materialName.isNotEmpty() && aMaterial.materialType.isNotEmpty() && matWeight != null && matPrice != null) {
+//        aMaterial.materialId = materials.size.toLong()
+//        aMaterial.materialWeight = matWeight
+//        aMaterial.materialPrice = matPrice
+//        materials.add(aMaterial.copy())
+//        logger.info("Material Added : [ $aMaterial ]")
+//    }
+//    else println("Material Not Added!!!")
 }
 
 fun addPrinter() {
@@ -121,35 +126,37 @@ fun addPrinter() {
 }
 
 fun updateMaterial() {
-    println("Update Material")
-    println()
-    listAllMaterials()
-    var searchId = getId()
-    val aMaterial = searchMaterial(searchId)
+    materialController.update()
 
-    if(aMaterial != null) {
-        println("Enter a new Name for [ ${aMaterial.materialName} ] : ")
-        var matName : String = readLine()!!
-        println("Enter a new Material Type for [ ${aMaterial.materialType} ] : ")
-        var matType : String = readLine()!!
-        println("Enter a new Weight for [ ${aMaterial.materialWeight} ] : ")
-        var matWeight : Int = readLine()?.toInt()!!
-        println("Enter a new Price for [ ${aMaterial.materialPrice} ] : ")
-        var matPrice : Double = readLine()?.toDouble()!!
-
-        if(matName.isNotEmpty() && matType.isNotEmpty()) {
-            aMaterial.materialName = matName
-            aMaterial.materialType = matType
-            aMaterial.materialWeight = matWeight
-            aMaterial.materialPrice = matPrice
-            println("You Updated [ ${aMaterial.materialName} ] for Name")
-            println("You Updated [ ${aMaterial.materialType} ] for Type")
-            println("You Updated [ ${aMaterial.materialWeight} ] for Weight")
-            println("You Updated [ ${aMaterial.materialPrice} ] for Price")
-        }
-        else println("Material Not Updated...")
-    }
-    else println("Material Not Updated...")
+//    println("Update Material")
+//    println()
+//    listAllMaterials()
+//    var searchId = getId()
+//    val aMaterial = searchMaterial(searchId)
+//
+//    if(aMaterial != null) {
+//        println("Enter a new Name for [ ${aMaterial.materialName} ] : ")
+//        var matName : String = readLine()!!
+//        println("Enter a new Material Type for [ ${aMaterial.materialType} ] : ")
+//        var matType : String = readLine()!!
+//        println("Enter a new Weight for [ ${aMaterial.materialWeight} ] : ")
+//        var matWeight : Int = readLine()?.toInt()!!
+//        println("Enter a new Price for [ ${aMaterial.materialPrice} ] : ")
+//        var matPrice : Double = readLine()?.toDouble()!!
+//
+//        if(matName.isNotEmpty() && matType.isNotEmpty()) {
+//            aMaterial.materialName = matName
+//            aMaterial.materialType = matType
+//            aMaterial.materialWeight = matWeight
+//            aMaterial.materialPrice = matPrice
+//            println("You Updated [ ${aMaterial.materialName} ] for Name")
+//            println("You Updated [ ${aMaterial.materialType} ] for Type")
+//            println("You Updated [ ${aMaterial.materialWeight} ] for Weight")
+//            println("You Updated [ ${aMaterial.materialPrice} ] for Price")
+//        }
+//        else println("Material Not Updated...")
+//    }
+//    else println("Material Not Updated...")
 }
 
 fun updatePrinter() {
@@ -185,10 +192,7 @@ fun updatePrinter() {
 }
 
 fun listAllMaterials() {
-    println("List All Materials")
-    println()
-    materials.forEach {logger.info("${it}")}
-    println()
+    materialController.list()
 }
 
 fun listAllPrinters() {
@@ -210,12 +214,15 @@ fun getId() : Long {
     return searchId
 }
 
-fun searchMaterial(id: Long) : MaterialModel? {
-    var foundMaterial: MaterialModel? = materials.find {m -> m.materialId == id}
-    return foundMaterial
+fun searchMaterial() {
+    materialController.search()
 }
 
 fun searchPrinter(id: Long) : PrinterModel? {
     var foundPrinter: PrinterModel? = printers.find {p -> p.printerId == id}
     return foundPrinter
+}
+
+fun dummyMaterialData() {
+    materialController.dummyData()
 }
