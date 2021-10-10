@@ -31,6 +31,9 @@ fun main(args: Array<String>) {
             6 -> listAllPrinters()
             7 -> updatePrinter()
             8 -> searchPrinter()
+            9 -> performCalculation()
+            10 -> createUser()
+            11 -> updateUser()
             -1 -> println("Exiting App")
             99 -> dummyMaterialData()
             else -> println("Invalid Option")
@@ -54,6 +57,9 @@ fun menu() : Int {
     println(" 6. List All Printers")
     println(" 7. Update Printer")
     println(" 8. Search Printer")
+    println(" 9. Perform Calculation")
+    println("10. Create User")
+    println("11. Update User")
     println("-1. Exit")
     println("99. Dummy Data")
     println()
@@ -64,6 +70,18 @@ fun menu() : Int {
     else
         -9
     return option
+}
+
+fun performCalculation() {
+
+}
+
+fun createUser() {
+
+}
+
+fun updateUser() {
+
 }
 
 fun addMaterial() {
