@@ -1,5 +1,6 @@
 package org.wit
 
+import controllers.CalculationController
 import controllers.MaterialController
 import controllers.PrinterController
 import models.UserModel
@@ -12,6 +13,7 @@ val user = UserModel()
 
 val materialController = MaterialController()
 val printerController = PrinterController()
+val calculationController = CalculationController()
 
 fun main(args: Array<String>) {
     //logger.info { "Launching 3D Printing Price Calculator" }
@@ -78,7 +80,7 @@ fun menu() : Int {
 }
 
 fun performCalculation() {
-
+    calculationController.GetPrintInformation()
 }
 
 fun createUser() {
@@ -134,6 +136,4 @@ fun deletePrinter() {
 fun dummyMaterialData() {
     materialController.dummyData()
     printerController.dummyData()
-
-    UserModel("Adrian",15.50,0.14,"$")
 }
