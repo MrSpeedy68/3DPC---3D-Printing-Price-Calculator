@@ -1,6 +1,7 @@
 package controllers;
 
 import models.MaterialModel
+import models.PrinterJSONStore
 import models.PrinterMemStore
 import models.PrinterModel
 import mu.KotlinLogging
@@ -9,7 +10,9 @@ import views.PrinterView
 
 class PrinterController {
 
-    val printers = PrinterMemStore()
+    //val printers = PrinterMemStore()
+
+    val printers = PrinterJSONStore()
     val printerView = PrinterView()
     val logger = KotlinLogging.logger {}
 

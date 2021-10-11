@@ -2,7 +2,6 @@ package org.wit
 
 import controllers.MaterialController
 import controllers.PrinterController
-import models.PrinterModel
 import models.UserModel
 import mu.KotlinLogging
 
@@ -121,4 +120,6 @@ fun searchPrinter() {
 fun dummyMaterialData() {
     materialController.dummyData()
     printerController.dummyData()
+
+    UserModel("Adrian",15.50,0.14,"$")
 }

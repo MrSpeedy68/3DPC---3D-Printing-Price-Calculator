@@ -1,6 +1,7 @@
 package controllers
 
 import MaterialMemStore
+import models.MaterialJSONStore
 import models.MaterialModel
 import mu.KotlinLogging
 import org.wit.searchMaterial
@@ -8,7 +9,9 @@ import views.MaterialView
 
 class MaterialController {
 
-    val materials = MaterialMemStore()
+    //val materials = MaterialMemStore()
+
+    val materials = MaterialJSONStore()
     val materialView = MaterialView()
     val logger = KotlinLogging.logger {}
 

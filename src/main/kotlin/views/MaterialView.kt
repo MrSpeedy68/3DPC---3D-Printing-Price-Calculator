@@ -2,6 +2,7 @@ package views
 
 import models.MaterialModel
 import MaterialMemStore
+import models.MaterialJSONStore
 
 class MaterialView {
 
@@ -58,7 +59,7 @@ class MaterialView {
         return false
     }
 
-    fun listAllMaterials(materials : MaterialMemStore) {
+    fun listAllMaterials(materials : MaterialJSONStore) {
         println("List All Materials")
         println()
         materials.logAll()

@@ -1,5 +1,6 @@
 package views
 
+import models.PrinterJSONStore
 import models.PrinterMemStore
 import models.PrinterModel
 
@@ -58,7 +59,7 @@ class PrinterView {
         return false
     }
 
-    fun listAllPrinter(printers : PrinterMemStore) {
+    fun listAllPrinter(printers : PrinterJSONStore) {
         println("List All Printers")
         println()
         printers.logAll()

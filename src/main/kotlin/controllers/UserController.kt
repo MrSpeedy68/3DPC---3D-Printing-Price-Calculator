@@ -15,7 +15,7 @@ class UserController {
         var aUser = UserModel()
 
         if(userView.addUserData(aUser)) {
-            user.
+
         }
     }
 
