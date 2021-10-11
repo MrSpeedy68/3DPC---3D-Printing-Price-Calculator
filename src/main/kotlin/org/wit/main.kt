@@ -26,13 +26,15 @@ fun main(args: Array<String>) {
             2 -> listAllMaterials()
             3 -> updateMaterial()
             4 -> searchMaterial()
-            5 -> addPrinter()
-            6 -> listAllPrinters()
-            7 -> updatePrinter()
-            8 -> searchPrinter()
-            9 -> performCalculation()
-            10 -> createUser()
-            11 -> updateUser()
+            5 -> deleteMaterial()
+            6 -> addPrinter()
+            7 -> listAllPrinters()
+            8 -> updatePrinter()
+            9 -> searchPrinter()
+            10 -> deletePrinter()
+            11 -> performCalculation()
+            12 -> createUser()
+            13 -> updateUser()
             -1 -> println("Exiting App")
             99 -> dummyMaterialData()
             else -> println("Invalid Option")
@@ -48,17 +50,21 @@ fun menu() : Int {
     var input : String? = null
 
     println("===Main Menu===")
+    println("===Materials===")
     println(" 1. Add Material")
     println(" 2. List All Materials")
     println(" 3. Update Material")
     println(" 4. Search Material")
-    println(" 5. Add Printer")
-    println(" 6. List All Printers")
-    println(" 7. Update Printer")
-    println(" 8. Search Printer")
-    println(" 9. Perform Calculation")
-    println("10. Create User")
-    println("11. Update User")
+    println(" 5. Delete Material")
+    println("===Printers===")
+    println(" 6. Add Printer")
+    println(" 7. List All Printers")
+    println(" 8. Update Printer")
+    println(" 9. Search Printer")
+    println("10. Delete Printer")
+    println("11. Perform Calculation")
+    println("12. Create User")
+    println("13. Update User")
     println("-1. Exit")
     println("99. Dummy Data")
     println()
@@ -99,6 +105,10 @@ fun searchMaterial() {
     materialController.search()
 }
 
+fun deleteMaterial() {
+    materialController.delete()
+}
+
 //=======================================\\
 
 fun addPrinter() {
@@ -115,6 +125,10 @@ fun updatePrinter() {
 
 fun searchPrinter() {
     printerController.search()
+}
+
+fun deletePrinter() {
+    printerController.delete()
 }
 
 fun dummyMaterialData() {

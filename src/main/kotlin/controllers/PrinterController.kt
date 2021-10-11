@@ -48,6 +48,20 @@ class PrinterController {
             logger.info("Printer Not Updated...")
     }
 
+    fun delete() {
+        printerView.listAllPrinter(printers)
+        var searchId = printerView.getId()
+        val aPrinter = search(searchId)
+
+        if(aPrinter != null) {
+            printers.delete(aPrinter)
+            println("Placemark Deleted...")
+            printerView.listAllPrinter(printers)
+        }
+        else
+            println("Placemark Not Deleted...")
+    }
+
     fun search() {
         val aPrinter = search(printerView.getId())!!
         printerView.showPrinter(aPrinter)

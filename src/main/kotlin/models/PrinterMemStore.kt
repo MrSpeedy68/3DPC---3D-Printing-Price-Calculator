@@ -39,6 +39,10 @@ class PrinterMemStore : PrinterStore{
         }
     }
 
+    override fun delete(printer: PrinterModel) {
+        printers.remove(printer)
+    }
+
     internal fun logAll() {
         printers.forEach { logger.info("${it}") }
     }

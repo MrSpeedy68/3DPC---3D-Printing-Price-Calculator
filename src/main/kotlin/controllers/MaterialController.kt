@@ -47,6 +47,20 @@ class MaterialController {
             logger.info("Material Not Updated...")
     }
 
+    fun delete() {
+        materialView.listAllMaterials(materials)
+        var searchId = materialView.getId()
+        val aMaterial = search(searchId)
+
+        if(aMaterial != null) {
+            materials.delete(aMaterial)
+            println("Material Deleted...")
+            materialView.listAllMaterials(materials)
+        }
+        else
+            println("Material Not Deleted...")
+    }
+
     fun search() {
         val aMaterial = search(materialView.getId())!!
         materialView.showMaterial(aMaterial)

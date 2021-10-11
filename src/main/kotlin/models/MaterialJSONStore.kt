@@ -55,6 +55,11 @@ class MaterialJSONStore : MaterialStore {
         serialize()
     }
 
+    override fun delete(material: MaterialModel) {
+        materials.remove(material)
+        serialize()
+    }
+
     internal fun logAll() {
         materials.forEach { logger.info("${it}") }
     }

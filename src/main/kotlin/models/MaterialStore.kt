@@ -5,4 +5,5 @@ interface MaterialStore {
     fun findOne(id: Long): MaterialModel?
     fun create(material: MaterialModel)
     fun update(material: MaterialModel)
+    fun delete(material: MaterialModel)
 }

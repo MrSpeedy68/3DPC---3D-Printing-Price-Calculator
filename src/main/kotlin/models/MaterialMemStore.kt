@@ -38,6 +38,10 @@ class MaterialMemStore : MaterialStore {
         }
     }
 
+    override fun delete(material: MaterialModel) {
+        materials.remove(material)
+    }
+
     internal fun logAll() {
         materials.forEach { logger.info("${it}") }
     }
