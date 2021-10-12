@@ -1,13 +1,13 @@
 package controllers
 
 import models.UserModel
-import models.UserMemStore
+import models.UserJSONStore
 import mu.KotlinLogging
 import views.UserView
 
 class UserController {
 
-    val user = UserModel()
+    val mainUser = UserJSONStore()
     val userView = UserView()
     val logger = KotlinLogging.logger {}
 
@@ -15,8 +15,16 @@ class UserController {
         var aUser = UserModel()
 
         if(userView.addUserData(aUser)) {
-
+            mainUser.create(aUser)
         }
+        else
+            logger.info("User Not Added!!")
     }
+
+    fun list() {
+        userView.showUser(mainUser)
+    }
+
+
 
 }

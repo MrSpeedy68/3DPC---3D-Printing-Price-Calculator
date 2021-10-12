@@ -1,15 +1,15 @@
 package views
 
-import models.UserMemStore
+import models.UserJSONStore
 import models.UserModel
 
 class UserView {
 
-    fun showUser(user: UserModel) {
-        if(user != null)
-            println("User Details [ $user ]")
-        else
-            println("User Not Found...")
+    fun showUser(user: UserJSONStore) {
+        println("User Details")
+        println()
+        user.log()
+        println()
     }
 
     fun addUserData(user: UserModel) : Boolean {
