@@ -50,7 +50,7 @@ class UserView {
             println("Enter a new currency for [ ${user.currency} ] : ")
             tempCurrency = readLine()!!
 
-            if(tempUserName.isNullOrEmpty() && tempCurrency.isNullOrEmpty()) {
+            if(tempUserName.isNotEmpty() && tempCurrency.isNotEmpty()) {
                 user.userName = tempUserName
                 user.labourCost = tempLabourCost
                 user.energyCost = tempEnergyCost

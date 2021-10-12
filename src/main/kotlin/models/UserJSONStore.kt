@@ -52,7 +52,7 @@ class UserJSONStore : UserStore{
     }
 
     private fun deserialize() {
-        val jsonString = read(JSON_FILE_PRINTER)
+        val jsonString = read(JSON_FILE_USER)
         mainUser = Gson().fromJson(jsonString, listType_User)
     }
 }

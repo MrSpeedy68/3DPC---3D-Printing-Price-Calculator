@@ -5,6 +5,7 @@ import models.PrinterModel
 import models.UserModel
 import org.wit.materialController
 import org.wit.printerController
+import org.wit.userController
 import kotlin.math.round
 
 class CalculationController {
@@ -14,7 +15,7 @@ class CalculationController {
     var modelMinutes: Int = 0
     var aMat = MaterialModel()
     var aPrinter = PrinterModel()
-    var user = UserModel("Adrian",15.50,0.14,"$")
+    var aUser = UserModel()
 
     fun GetPrintInformation() {
         println("Enter How Much Material The Print Will Take: ")
@@ -40,10 +41,12 @@ class CalculationController {
         var printerId = readLine()?.toLong()!!
         aPrinter = printerController.search(printerId)!!
 
+        aUser = userController.returnUser()
+
         println("Model Weight: $modelWeight Model Time: $modelHours H and $modelMinutes m")
         println("Material $aMat")
         println("Printer $aPrinter")
-        println("User $user")
+        println("User $aUser")
 
         TotalPrintCost(TotalFilamentCost(),ElectricityCost(),PrinterCosts())
     }
@@ -56,7 +59,7 @@ class CalculationController {
 
         totalFilamentCost = RoundToTwoDecimalPlaces(totalFilamentCost)
 
-        println("The Price in material for this print is : ${user.currency} $totalFilamentCost")
+        println("The Price in material for this print is : ${aUser.currency} $totalFilamentCost")
 
         return totalFilamentCost
     }
@@ -65,11 +68,11 @@ class CalculationController {
 
         var printerkwh : Double = aPrinter.wattUsage.toDouble()
         var kwhUsed = printerkwh / 1000
-        var totalElectricityCost = (kwhUsed * GetTimeInHoursDecimal(modelHours, modelMinutes)) * user.energyCost
+        var totalElectricityCost = (kwhUsed * GetTimeInHoursDecimal(modelHours, modelMinutes)) * aUser.energyCost
 
         totalElectricityCost = RoundToTwoDecimalPlaces(totalElectricityCost)
 
-        println("The Total Electricity Cost for this print is : ${user.currency} $totalElectricityCost")
+        println("The Total Electricity Cost for this print is : ${aUser.currency} $totalElectricityCost")
 
         return totalElectricityCost
     }
@@ -80,7 +83,7 @@ class CalculationController {
 
         printerCosts = RoundToTwoDecimalPlaces(printerCosts)
 
-        println("The total Printer Depriciation Cost for this print is : ${user.currency} $printerCosts")
+        println("The total Printer Depriciation Cost for this print is : ${aUser.currency} $printerCosts")
 
         return  printerCosts
     }
@@ -90,7 +93,7 @@ class CalculationController {
 
         totalPrintCost = RoundToTwoDecimalPlaces(totalPrintCost)
 
-        println("The total cost for this print is : ${user.currency} $totalPrintCost")
+        println("The total cost for this print is : ${aUser.currency} $totalPrintCost")
     }
 
 //Helper Functions
