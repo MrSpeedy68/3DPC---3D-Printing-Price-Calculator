@@ -1,16 +1,13 @@
 package screens
 
+import controllers.MaterialUIController
 import controllers.MenuUIController
 import javafx.geometry.Orientation
 import tornadofx.*
 
 class MaterialMenuScreen : View("Material Menu") {
 
-    val menuUIController : MenuUIController by inject()
-
-    //val tableContent = placemarkUIController.placemarks.findAll()
-    //val data = tableContent.observable()
-
+    val materialUIController : MaterialUIController by inject()
 
     override val root = form {
         setPrefSize(400.0, 400.0)
@@ -22,7 +19,7 @@ class MaterialMenuScreen : View("Material Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.loadingMaterialScreen()
+                        materialUIController.loadingOpenAdd()
                     }
                 }
             }
@@ -33,7 +30,7 @@ class MaterialMenuScreen : View("Material Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.loadingPrinterScreen()
+                        materialUIController.loadingOpenList()
                     }
                 }
             }
@@ -44,7 +41,7 @@ class MaterialMenuScreen : View("Material Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.loadingUserScreen()
+                        materialUIController.loadingOpenUpdate()
                     }
                 }
             }
@@ -54,7 +51,7 @@ class MaterialMenuScreen : View("Material Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.closeMaterial()
+                        materialUIController.loadingOpenDelete()
                     }
                 }
             }
@@ -63,7 +60,7 @@ class MaterialMenuScreen : View("Material Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.closeMaterial()
+                        materialUIController.loadingCloseMenu()
                     }
                 }
             }
