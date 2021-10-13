@@ -1,8 +1,6 @@
 package controllers;
 
-import models.MaterialModel
 import models.PrinterJSONStore
-import models.PrinterMemStore
 import models.PrinterModel
 import mu.KotlinLogging
 import views.PrinterView

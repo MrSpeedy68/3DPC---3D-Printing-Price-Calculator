@@ -1,7 +1,6 @@
 package views
 
 import models.PrinterJSONStore
-import models.PrinterMemStore
 import models.PrinterModel
 
 class PrinterView {

@@ -2,7 +2,12 @@ package screens
 
 import controllers.MenuUIController
 import javafx.application.Platform
+import javafx.collections.FXCollections
 import javafx.geometry.Orientation
+import models.MaterialJSONStore
+import models.MaterialModel
+import models.PrinterJSONStore
+import models.PrinterModel
 import tornadofx.*
 
 class MenuScreen : View("3D Printing Price Calculator") {
@@ -45,6 +50,32 @@ class MenuScreen : View("3D Printing Price Calculator") {
                     }
                 }
             }
+
+            //-----------Combo Box----------------\\
+            text("")
+            val materials = MaterialJSONStore()
+            val data = materials.findAllObservable()
+//Make a function that refreshes the list on opening the main menu
+            combobox<MaterialModel> {
+                items = data
+            }
+
+            text("")
+            val printers = PrinterJSONStore()
+            val data2 = printers.findAllObservable()
+//Make a function that refreshes the list on opening the main menu
+            combobox<PrinterModel> {
+                items = data2
+            }
+
+
+
+
+
+
+
+
+
             text("")
             button("Exit") {
 

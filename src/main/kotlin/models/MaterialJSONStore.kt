@@ -3,6 +3,8 @@ package models
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import javafx.collections.FXCollections
+import javafx.collections.ObservableList
 import models.MaterialModel
 import mu.KotlinLogging
 
@@ -31,6 +33,12 @@ class MaterialJSONStore : MaterialStore {
 
     override fun findAll(): MutableList<MaterialModel> {
         return materials
+    }
+
+    override fun findAllObservable() : ObservableList<MaterialModel> {
+        var obsList = FXCollections.observableList(materials)
+
+        return obsList
     }
 
     override fun findOne(id: Long) : MaterialModel? {

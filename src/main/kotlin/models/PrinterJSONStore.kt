@@ -3,6 +3,8 @@ package models
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import javafx.collections.FXCollections
+import javafx.collections.ObservableList
 import models.PrinterModel
 import mu.KotlinLogging
 
@@ -31,6 +33,12 @@ class PrinterJSONStore : PrinterStore {
 
     override fun findAll(): MutableList<PrinterModel> {
         return printers
+    }
+
+    override fun findAllObservable() : ObservableList<PrinterModel> {
+        var obsList = FXCollections.observableList(printers)
+
+        return obsList
     }
 
     override fun findOne(id: Long) : PrinterModel? {

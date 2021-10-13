@@ -1,7 +1,6 @@
 package views
 
 import models.MaterialModel
-import MaterialMemStore
 import models.MaterialJSONStore
 
 class MaterialView {
