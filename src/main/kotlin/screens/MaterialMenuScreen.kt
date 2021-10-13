@@ -11,6 +11,7 @@ class MaterialMenuScreen : View("Material Menu") {
 
     override val root = form {
         setPrefSize(400.0, 400.0)
+        text("Material Menu")
         fieldset(labelPosition = Orientation.VERTICAL) {
             text("")
             button("Add Material") {

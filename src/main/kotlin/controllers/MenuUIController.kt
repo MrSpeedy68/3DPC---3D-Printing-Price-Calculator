@@ -10,7 +10,6 @@ import screens.UserScreen
 
 class MenuUIController : Controller() {
 
-    val materials = MaterialJSONStore()
     val logger = KotlinLogging.logger {}
 
     init {
@@ -37,23 +36,5 @@ class MenuUIController : Controller() {
 
     fun loadingCalculationScreen() {
 
-    }
-
-    fun closeMaterial() {
-        runLater {
-            find(MaterialMenuScreen::class).replaceWith(MenuScreen::class,sizeToScene = true, centerOnScreen = true)
-        }
-    }
-
-    fun closePrinter() {
-        runLater {
-            find(PrintersMenuScreen::class).replaceWith(MenuScreen::class,sizeToScene = true, centerOnScreen = true)
-        }
-    }
-
-    fun closeUser() {
-        runLater {
-            find(UserScreen::class).replaceWith(MenuScreen::class,sizeToScene = true, centerOnScreen = true)
-        }
     }
 }

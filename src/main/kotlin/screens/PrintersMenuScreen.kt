@@ -1,12 +1,12 @@
 package screens
 
-import controllers.MenuUIController
+import controllers.PrinterUIController
 import javafx.geometry.Orientation
 import tornadofx.*
 
 class PrintersMenuScreen : View("Printer Menu") {
 
-    val menuUIController : MenuUIController by inject()
+    val printerUIController : PrinterUIController by inject()
 
     //val tableContent = placemarkUIController.placemarks.findAll()
     //val data = tableContent.observable()
@@ -14,6 +14,7 @@ class PrintersMenuScreen : View("Printer Menu") {
 
     override val root = form {
         setPrefSize(400.0, 400.0)
+        text("Printer Menu")
         fieldset(labelPosition = Orientation.VERTICAL) {
             text("")
             button("Add Printer") {
@@ -22,7 +23,7 @@ class PrintersMenuScreen : View("Printer Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.loadingMaterialScreen()
+                        printerUIController.loadingOpenAdd()
                     }
                 }
             }
@@ -33,7 +34,7 @@ class PrintersMenuScreen : View("Printer Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.loadingPrinterScreen()
+                        printerUIController.loadingOpenList()
                     }
                 }
             }
@@ -44,7 +45,7 @@ class PrintersMenuScreen : View("Printer Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.loadingUserScreen()
+                        printerUIController.loadingOpenUpdate()
                     }
                 }
             }
@@ -54,7 +55,7 @@ class PrintersMenuScreen : View("Printer Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.closeMaterial()
+                        printerUIController.loadingOpenDelete()
                     }
                 }
             }
@@ -63,7 +64,7 @@ class PrintersMenuScreen : View("Printer Menu") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        menuUIController.closePrinter()
+                        printerUIController.loadingCloseMenu()
                     }
                 }
             }
