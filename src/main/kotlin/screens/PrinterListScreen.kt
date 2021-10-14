@@ -1,7 +1,6 @@
 package screens
 
 import controllers.PrinterUIController
-import models.MaterialModel
 import models.PrinterModel
 import tornadofx.*
 

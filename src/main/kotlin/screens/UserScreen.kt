@@ -1,11 +1,9 @@
 package screens
 
-import controllers.MenuUIController
 import controllers.UserUIController
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
-import jdk.nashorn.internal.runtime.JSType.toDouble
 import tornadofx.*
 
 class UserScreen : View("User Settings") {

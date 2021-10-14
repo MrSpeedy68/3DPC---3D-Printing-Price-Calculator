@@ -23,7 +23,7 @@ class MaterialView {
         material.materialWeight = readLine()?.toInt()!!
 
         print("Enter a Material Price : ")
-        material.materialPrice = readLine()?.toDouble()!!
+        material.materialPrice = readLine()?.toFloat()!!
 
         return material.materialName.isNotEmpty() && material.materialType.isNotEmpty()
     }
@@ -35,7 +35,7 @@ class MaterialView {
         var tempMatName: String?
         var tempMatType: String?
         var tempMatWeight: Int?
-        var tempMatPrice: Double?
+        var tempMatPrice: Float?
 
         if(material != null) {
             println("Enter a new Name for [ ${material.materialName} ] : ")
@@ -45,7 +45,7 @@ class MaterialView {
             println("Enter a new Weight for [ ${material.materialWeight} ] : ")
             tempMatWeight = readLine()?.toInt()!!
             println("Enter a new Price for [ ${material.materialPrice} ] : ")
-            tempMatPrice= readLine()?.toDouble()!!
+            tempMatPrice= readLine()?.toFloat()!!
 
             if(tempMatName.isNotEmpty() && tempMatType.isNotEmpty()) {
                 material.materialName = tempMatName

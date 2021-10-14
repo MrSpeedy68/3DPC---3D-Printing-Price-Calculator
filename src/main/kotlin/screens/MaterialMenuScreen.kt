@@ -1,7 +1,6 @@
 package screens
 
 import controllers.MaterialUIController
-import controllers.MenuUIController
 import javafx.geometry.Orientation
 import tornadofx.*
 

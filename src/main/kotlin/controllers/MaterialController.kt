@@ -70,8 +70,8 @@ class MaterialController {
     }
 
     fun dummyData() {
-        materials.create(MaterialModel(materialName = "Esun Blue", materialType = "PLA", materialWeight = 1000, materialPrice = 26.50))
-        materials.create(MaterialModel(materialName = "Esun Purple", materialType = "ABS", materialWeight = 1000, materialPrice = 29.50))
-        materials.create(MaterialModel(materialName = "GEETECH Grey", materialType = "PLA", materialWeight = 1000, materialPrice = 16.00))
+        materials.create(MaterialModel(materialName = "Esun Blue", materialType = "PLA", materialWeight = 1000, materialPrice = 26.50f))
+        materials.create(MaterialModel(materialName = "Esun Purple", materialType = "ABS", materialWeight = 1000, materialPrice = 29.50f))
+        materials.create(MaterialModel(materialName = "GEETECH Grey", materialType = "PLA", materialWeight = 1000, materialPrice = 16.00f))
     }
 }

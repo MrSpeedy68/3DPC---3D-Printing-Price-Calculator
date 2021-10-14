@@ -1,9 +1,6 @@
 package screens
 
-import controllers.MaterialUIController
 import controllers.PrinterUIController
-import javafx.beans.property.SimpleStringProperty
-import javafx.geometry.Orientation
 import tornadofx.*
 
 class PrinterUpdateScreen : View("Update a Printer") {

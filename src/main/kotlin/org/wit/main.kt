@@ -85,7 +85,7 @@ fun menu() : Int {
 }
 
 fun performCalculation() {
-    calculationController.GetPrintInformation()
+
 }
 
 fun createUser() {

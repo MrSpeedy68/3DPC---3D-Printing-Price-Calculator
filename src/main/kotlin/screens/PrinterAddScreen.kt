@@ -1,7 +1,7 @@
 package screens
 
 import controllers.PrinterUIController
-import javafx.beans.property.SimpleDoubleProperty
+import javafx.beans.property.SimpleFloatProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
@@ -13,7 +13,7 @@ class PrinterAddScreen : View("Add a Printer") {
     val model = ViewModel()
 
     val _name = model.bind { SimpleStringProperty() }
-    val _price = model.bind { SimpleDoubleProperty() }
+    val _price = model.bind { SimpleFloatProperty() }
     val _watts = model.bind { SimpleIntegerProperty() }
     val _investment = model.bind { SimpleIntegerProperty() }
 
@@ -40,7 +40,7 @@ class PrinterAddScreen : View("Add a Printer") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        printerUIController.add(_name.value.toString(), _price.value.toDouble(), _watts.value.toInt(), _investment.value.toInt())
+                        printerUIController.add(_name.value.toString(), _price.value.toFloat(), _watts.value.toInt(), _investment.value.toInt())
                     }
                 }
             }

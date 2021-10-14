@@ -8,10 +8,6 @@ class PrintersMenuScreen : View("Printer Menu") {
 
     val printerUIController : PrinterUIController by inject()
 
-    //val tableContent = placemarkUIController.placemarks.findAll()
-    //val data = tableContent.observable()
-
-
     override val root = form {
         setPrefSize(400.0, 400.0)
         text("Printer Menu")

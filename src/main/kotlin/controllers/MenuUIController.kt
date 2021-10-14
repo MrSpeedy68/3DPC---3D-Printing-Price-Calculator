@@ -1,6 +1,9 @@
 package controllers
 
-import models.MaterialJSONStore
+import javafx.beans.property.SimpleStringProperty
+import models.MaterialModel
+import models.PrinterModel
+import models.UserModel
 import mu.KotlinLogging
 import tornadofx.*
 import screens.MaterialMenuScreen
@@ -11,6 +14,9 @@ import screens.UserScreen
 class MenuUIController : Controller() {
 
     val logger = KotlinLogging.logger {}
+    var totalPrintCost: Float = 0.0f
+    var calculationController = CalculationController()
+    var totalText = SimpleStringProperty("Total Printing Costs : $totalPrintCost")
 
     init {
         logger.info { "Launching 3D Printing Price Calculator TornadoFX UI App" }
@@ -34,7 +40,10 @@ class MenuUIController : Controller() {
         }
     }
 
-    fun loadingCalculationScreen() {
+    fun loadingCalculation(aMat: MaterialModel, aPrinter: PrinterModel, aUser: UserModel, modelWeight: Int, hours: Int, minutes: Int) : String {
+        totalPrintCost = calculationController.TotalPrintCost(aMat, aPrinter, aUser,
+            modelWeight, hours, minutes)
 
+         return "Total Printing Costs : $totalPrintCost"
     }
 }

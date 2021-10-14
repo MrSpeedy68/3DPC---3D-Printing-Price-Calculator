@@ -11,7 +11,7 @@ class MaterialUIController : Controller() {
     var materials = MaterialJSONStore()
     var logger = KotlinLogging.logger {}
 
-    fun add(_name : String, _type : String, _weight : Int, _price : Double){
+    fun add(_name : String, _type : String, _weight : Int, _price : Float){
 
         var aMaterial = MaterialModel(materialName = _name, materialType = _type, materialWeight = _weight, materialPrice = _price)
         materials.create(aMaterial)

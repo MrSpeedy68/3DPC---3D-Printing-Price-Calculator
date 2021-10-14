@@ -71,9 +71,9 @@ class PrinterController {
     }
 
     fun dummyData() {
-        printers.create(PrinterModel(printerName = "Elegoo Mars 2 Pro", printerPrice = 249.95, wattUsage = 50, investmentReturn = 24))
-        printers.create(PrinterModel(printerName = "Ender 3 Pro", printerPrice = 149.95, wattUsage = 150, investmentReturn = 12))
-        printers.create(PrinterModel(printerName = "CR10 V3", printerPrice = 460.0, wattUsage = 200, investmentReturn = 24))
+        printers.create(PrinterModel(printerName = "Elegoo Mars 2 Pro", printerPrice = 249.95f, wattUsage = 50, investmentReturn = 24))
+        printers.create(PrinterModel(printerName = "Ender 3 Pro", printerPrice = 149.95f, wattUsage = 150, investmentReturn = 12))
+        printers.create(PrinterModel(printerName = "CR10 V3", printerPrice = 460.0f, wattUsage = 200, investmentReturn = 24))
     }
 
 }

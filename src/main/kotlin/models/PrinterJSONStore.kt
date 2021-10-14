@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
-import models.PrinterModel
 import mu.KotlinLogging
 
 import org.wit.placemark.console.helpers.*

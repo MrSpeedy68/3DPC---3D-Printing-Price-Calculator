@@ -17,7 +17,7 @@ class PrinterView {
         printer.printerName = readLine()!!
 
         print("Enter Printer Price : ")
-        printer.printerPrice = readLine()?.toDouble()!!
+        printer.printerPrice = readLine()?.toFloat()!!
 
         print("Enter Printers Power Usage in Watts : ")
         printer.wattUsage = readLine()?.toInt()!!
@@ -33,7 +33,7 @@ class PrinterView {
         println()
 
         var tempPrinterName: String?
-        var tempPrinterPrice: Double?
+        var tempPrinterPrice: Float?
         var tempWattUsage: Int?
         var tempInvestmentReturn: Int?
 
@@ -41,7 +41,7 @@ class PrinterView {
             println("Enter a new Name for [ ${printer.printerName} ] : ")
             tempPrinterName = readLine()!!
             println("Enter a new Price for [ ${printer.printerPrice} ] : ")
-            tempPrinterPrice = readLine()?.toDouble()!!
+            tempPrinterPrice = readLine()?.toFloat()!!
             println("Enter a new Watt Usage for [ ${printer.wattUsage} ] : ")
             tempWattUsage = readLine()?.toInt()!!
             println("Enter a new Price for [ ${printer.investmentReturn} ] : ")

@@ -3,72 +3,28 @@ package controllers
 import models.MaterialModel
 import models.PrinterModel
 import models.UserModel
-import org.wit.materialController
-import org.wit.printerController
-import org.wit.userController
-import kotlin.math.round
 
 class CalculationController {
 
-    var modelWeight: Double = 0.0
-    var modelHours: Int = 0
-    var modelMinutes: Int = 0
-    var aMat = MaterialModel()
-    var aPrinter = PrinterModel()
-    var aUser = UserModel()
-
-    fun GetPrintInformation() {
-        println("Enter How Much Material The Print Will Take: ")
-        modelWeight = readLine()?.toDouble()!!
-
-        println()
-        println("Enter How Long The Print Will Take In Hours: ")
-        modelHours = readLine()?.toInt()!!
-
-        println()
-        println("Enter How Long The Print Will Take In Minutes: ")
-        modelMinutes = readLine()?.toInt()!!
-
-        println()
-        println("Enter Which Material ID You are Using: ")
-        materialController.list()
-        var matId = readLine()?.toLong()!!
-        aMat = materialController.search(matId)!!
-
-        println()
-        println("Enter Which Printer ID You are Using: ")
-        printerController.list()
-        var printerId = readLine()?.toLong()!!
-        aPrinter = printerController.search(printerId)!!
-
-        aUser = userController.returnUser()
-
-        println("Model Weight: $modelWeight Model Time: $modelHours H and $modelMinutes m")
-        println("Material $aMat")
-        println("Printer $aPrinter")
-        println("User $aUser")
-
-        TotalPrintCost(TotalFilamentCost(),ElectricityCost(),PrinterCosts())
-    }
 
     //Add A Markup % ontop of the material
-    fun TotalFilamentCost() : Double {
+    fun TotalFilamentCost(aMat: MaterialModel, modelWeight: Int) : Float {
         var pricePerGram = aMat.materialPrice / aMat.materialWeight
 
         var totalFilamentCost = pricePerGram * modelWeight
 
         totalFilamentCost = RoundToTwoDecimalPlaces(totalFilamentCost)
 
-        println("The Price in material for this print is : ${aUser.currency} $totalFilamentCost")
+        println("The Price in material for this print is : $totalFilamentCost")
 
         return totalFilamentCost
     }
 
-    fun ElectricityCost() : Double {
+    fun ElectricityCost(aPrinter: PrinterModel, hours: Int, minutes: Int, aUser: UserModel) : Float {
 
-        var printerkwh : Double = aPrinter.wattUsage.toDouble()
+        var printerkwh : Float = aPrinter.wattUsage.toFloat()
         var kwhUsed = printerkwh / 1000
-        var totalElectricityCost = (kwhUsed * GetTimeInHoursDecimal(modelHours, modelMinutes)) * aUser.energyCost
+        var totalElectricityCost = ((kwhUsed * GetTimeInHoursDecimal(hours, minutes)) * aUser.energyCost).toFloat()
 
         totalElectricityCost = RoundToTwoDecimalPlaces(totalElectricityCost)
 
@@ -77,35 +33,36 @@ class CalculationController {
         return totalElectricityCost
     }
 
-    fun PrinterCosts() : Double {
+    fun PrinterCosts(aPrinter: PrinterModel, hours: Int, minutes: Int) : Float {
         var monthsToHours = aPrinter.investmentReturn * 720 //Turn Months into days x30 and days into hours x24 which equals 720
-        var printerCosts = (aPrinter.printerPrice / monthsToHours) * GetTimeInHoursDecimal(modelHours, modelMinutes)
+        var printerCosts: Float = ((aPrinter.printerPrice / monthsToHours) * GetTimeInHoursDecimal(hours, minutes)).toFloat()
 
         printerCosts = RoundToTwoDecimalPlaces(printerCosts)
 
-        println("The total Printer Depriciation Cost for this print is : ${aUser.currency} $printerCosts")
+        println("The total Printer Depriciation Cost for this print is : $printerCosts")
 
         return  printerCosts
     }
 
-    fun TotalPrintCost(filamentCost: Double, eneryCost: Double, printerCost: Double) {
-        var totalPrintCost = filamentCost + eneryCost + printerCost
+    fun TotalPrintCost(aMat: MaterialModel, aPrinter: PrinterModel, aUser: UserModel, modelWeight: Int, hours: Int, minutes: Int) : Float {
+        var totalPrintCost = TotalFilamentCost(aMat,modelWeight) + ElectricityCost(aPrinter, hours, minutes, aUser) + PrinterCosts(aPrinter, hours, minutes)
 
         totalPrintCost = RoundToTwoDecimalPlaces(totalPrintCost)
 
         println("The total cost for this print is : ${aUser.currency} $totalPrintCost")
+
+        return totalPrintCost
     }
 
 //Helper Functions
-    fun GetTimeInHoursDecimal(hours: Int, minutes: Int) : Double {
-        var tempHours : Double = (minutes / 60).toDouble()
+    fun GetTimeInHoursDecimal(hours: Int, minutes: Int) : Float {
+        var tempHours : Float = (minutes / 60).toFloat()
 
         return hours + tempHours
     }
 
-    fun RoundToTwoDecimalPlaces(num:Double): Double {
-        val roundedNum:Double = String.format("%.2f", num).toDouble()
+    fun RoundToTwoDecimalPlaces(num: Float): Float {
 
-        return  roundedNum
+        return String.format("%.2f", num).toFloat()
     }
 }

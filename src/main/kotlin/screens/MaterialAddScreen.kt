@@ -1,7 +1,7 @@
 package screens
 
 import controllers.MaterialUIController
-import javafx.beans.property.SimpleDoubleProperty
+import javafx.beans.property.SimpleFloatProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
@@ -14,7 +14,7 @@ class MaterialAddScreen : View("Add a Material"){
     val _name = model.bind { SimpleStringProperty() }
     val _type = model.bind { SimpleStringProperty() }
     val _weight = model.bind { SimpleIntegerProperty() }
-    val _price = model.bind { SimpleDoubleProperty() }
+    val _price = model.bind { SimpleFloatProperty() }
 
     override val root = form {
         setPrefSize(600.0, 400.0)
@@ -37,7 +37,7 @@ class MaterialAddScreen : View("Add a Material"){
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        materialUIController.add(_name.value.toString(), _type.value.toString(), _weight.value.toInt(), _price.value.toDouble())
+                        materialUIController.add(_name.value.toString(), _type.value.toString(), _weight.value.toInt(), _price.value.toFloat())
                     }
                 }
             }

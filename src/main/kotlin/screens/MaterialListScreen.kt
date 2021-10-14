@@ -2,12 +2,7 @@ package screens
 
 import controllers.MaterialUIController
 import tornadofx.*
-import javafx.beans.property.SimpleObjectProperty
-import javafx.collections.FXCollections
-import javafx.scene.control.TableView
-import javafx.scene.layout.GridPane
 import models.MaterialModel
-import tornadofx.Stylesheet.Companion.tableView
 
 class MaterialListScreen : View("Material List") {
 
