@@ -17,6 +17,10 @@ class MaterialUIController : Controller() {
         materials.create(aMaterial)
     }
 
+    fun delete(aMat: MaterialModel) {
+        materials.delete(aMat)
+    }
+
 
 
     //==============Open============

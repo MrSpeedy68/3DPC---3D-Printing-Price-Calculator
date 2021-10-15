@@ -13,6 +13,7 @@ class MenuScreen : View("3D Printing Price Calculator") {
 
     val menuUIController : MenuUIController by inject()
     val model = ViewModel()
+    var userJSONStore = UserJSONStore()
 
     val _modelWeight = model.bind { SimpleIntegerProperty() }
     val _hours = model.bind { SimpleIntegerProperty() }
@@ -21,14 +22,16 @@ class MenuScreen : View("3D Printing Price Calculator") {
     var selectedPrinter = model.bind { SimpleObjectProperty<PrinterModel>() }
     var selectedMaterial = model.bind { SimpleObjectProperty<MaterialModel>() }
 
-    var userJSONStore = UserJSONStore()
-
-    var price: Double = 0.0
+    //var price: Double = 0.0
 
     var total = model.bind { SimpleStringProperty("Total Price: ") }
 
+    val printers = PrinterJSONStore()
+    var printerData = printers.findAll().observable()
 
 
+    val materials = MaterialJSONStore()
+    var materialData = materials.findAllObservable().observable()
 
 
 
@@ -70,22 +73,15 @@ class MenuScreen : View("3D Printing Price Calculator") {
                 }
             }
 
-
-
-            text(total)
             //-----------Combo Box----------------\\
             text("")
-            val materials = MaterialJSONStore()
-            val data = materials.findAllObservable()
 //Make a function that refreshes the list on opening the main menu
-            combobox(selectedMaterial,data)
-
+            combobox(selectedMaterial,materialData) {
+            }
 
             text("")
-            val printers = PrinterJSONStore()
-            val data2 = printers.findAllObservable()
 //Make a function that refreshes the list on opening the main menu
-            combobox(selectedPrinter, data2)
+            combobox(selectedPrinter, printerData)
 
             //===============Calculation================
             field("Model Weight") {
@@ -112,21 +108,7 @@ class MenuScreen : View("3D Printing Price Calculator") {
                 }
             }
 
-            text("")
-            text("")
-            text(total) {
-
-            }
-            text("")
-            text("")
-            text("")
-            text("")
-            text("")
-
-
-
-
-
+            text(total)
 
 
             text("")
@@ -142,7 +124,13 @@ class MenuScreen : View("3D Printing Price Calculator") {
                 }
             }
         }
+    }
 
+    init {
+        runAsync {
+            printerData = printers.findAll().observable()
+            materialData = materials.findAllObservable().observable()
+        }
     }
 
 

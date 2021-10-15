@@ -12,9 +12,17 @@ class PrinterUIController : Controller() {
     var printers = PrinterJSONStore()
     var logger = KotlinLogging.logger {}
 
+    var menuScreen = MenuScreen()
+
     fun add(_name: String, _price : Float, _watts : Int, _investment : Int) {
         var aPrinter = PrinterModel(printerName = _name, printerPrice = _price, wattUsage = _watts, investmentReturn = _investment)
         printers.create(aPrinter)
+
+        menuScreen.printerData.add(aPrinter)
+    }
+
+    fun delete(aPrinter: PrinterModel) {
+        printers.delete(aPrinter)
     }
 
     //==============Open============

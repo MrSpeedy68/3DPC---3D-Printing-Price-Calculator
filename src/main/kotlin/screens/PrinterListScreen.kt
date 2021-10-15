@@ -10,6 +10,8 @@ class PrinterListScreen : View("List of Printers") {
     val tableContent = printerUIController.printers.findAll()
     val data = tableContent.observable()
 
+    var selectedPrinter = PrinterModel()
+
     override val root = vbox {
         setPrefSize(600.0, 200.0)
         text("List of All Printers")
@@ -19,7 +21,23 @@ class PrinterListScreen : View("List of Printers") {
             readonlyColumn("PRICE", PrinterModel::printerPrice)
             readonlyColumn("WATT USAGE", PrinterModel::wattUsage)
             readonlyColumn("RETURN ON INVESTMENT", PrinterModel::investmentReturn)
+
+            onUserSelect { aPrinter ->
+                println(aPrinter)
+                selectedPrinter = aPrinter
+            }
         }
+
+        button("Delete") {
+            isDefaultButton = true
+            useMaxWidth = true
+            action {
+                runAsyncWithProgress {
+                    printerUIController.delete(selectedPrinter)
+                }
+            }
+        }
+
         button("Close") {
             useMaxWidth = true
             action {

@@ -73,6 +73,7 @@ class PrinterJSONStore : PrinterStore {
     override fun delete(printer: PrinterModel) {
         printers.remove(printer)
         serialize()
+        logger.info("Printer Deleted!!!")
     }
 
     internal fun logAll() {
