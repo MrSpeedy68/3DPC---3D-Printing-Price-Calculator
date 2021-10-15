@@ -15,7 +15,6 @@ class MaterialUIController : Controller() {
 
         var aMaterial = MaterialModel(materialName = _name, materialType = _type, materialWeight = _weight, materialPrice = _price)
         materials.create(aMaterial)
-        logger.info("Material Added")
     }
 
 

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList
 import mu.KotlinLogging
 
 import org.wit.placemark.console.helpers.*
+import views.MaterialView
 import java.util.*
 
 private val logger = KotlinLogging.logger {}
@@ -15,6 +16,8 @@ private val logger = KotlinLogging.logger {}
 val JSON_FILE_MATERIAL = "materials.json"
 val gsonBuilder_Mat = GsonBuilder().setPrettyPrinting().create()
 val listTypeMat = object : TypeToken<java.util.ArrayList<MaterialModel>>() {}.type
+
+val materialView = MaterialView()
 
 fun generateRandomIdMaterial(): Long {
     return Random().nextLong()
@@ -45,10 +48,16 @@ class MaterialJSONStore : MaterialStore {
         return foundMaterial
     }
 
-    override fun create(material: MaterialModel) {
+    override fun create(material: MaterialModel)  {
         material.materialId = generateRandomIdMaterial()
-        materials.add(material)
-        serialize()
+        if(materialView.addMaterialData(material)) {
+            materials.add(material)
+            serialize()
+            logger.info ("Material Added!!!")
+        }
+        else
+            logger.info ("Material Not Added!!!")
+
     }
 
     override fun update(material: MaterialModel) {

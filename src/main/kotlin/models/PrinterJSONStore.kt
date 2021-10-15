@@ -8,6 +8,7 @@ import javafx.collections.ObservableList
 import mu.KotlinLogging
 
 import org.wit.placemark.console.helpers.*
+import views.PrinterView
 import java.util.*
 
 private val logger = KotlinLogging.logger {}
@@ -15,6 +16,8 @@ private val logger = KotlinLogging.logger {}
 val JSON_FILE_PRINTER = "printer.json"
 val gsonBuilder_Printer = GsonBuilder().setPrettyPrinting().create()
 val listType_Printer = object : TypeToken<java.util.ArrayList<PrinterModel>>() {}.type
+
+val printerView = PrinterView()
 
 fun generateRandomIdPrinter(): Long {
     return Random().nextLong()
@@ -47,8 +50,13 @@ class PrinterJSONStore : PrinterStore {
 
     override fun create(printer: PrinterModel) {
         printer.printerId = generateRandomIdPrinter()
-        printers.add(printer)
-        serialize()
+        if(printerView.addPrinterData(printer)) {
+            printers.add(printer)
+            serialize()
+            logger.info("Printer Added!!!")
+        }
+        else
+            logger.info("Printer Not Added!!!")
     }
 
     override fun update(printer: PrinterModel) {

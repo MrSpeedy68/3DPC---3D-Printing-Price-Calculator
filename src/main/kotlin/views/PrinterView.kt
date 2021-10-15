@@ -13,19 +13,20 @@ class PrinterView {
     }
 
     fun addPrinterData(printer: PrinterModel) : Boolean {
-        print("Enter a Printer Name : ")
-        printer.printerName = readLine()!!
+        if(printer.printerName.isEmpty()) {
+            return false
+        }
+        if(printer.printerPrice <= 0) {
+            return false
+        }
+        if(printer.wattUsage <= 0) {
+            return false
+        }
+        if(printer.investmentReturn <= 0) {
+            return false
+        }
 
-        print("Enter Printer Price : ")
-        printer.printerPrice = readLine()?.toFloat()!!
-
-        print("Enter Printers Power Usage in Watts : ")
-        printer.wattUsage = readLine()?.toInt()!!
-
-        print("In How Many Months Do You Want To Repay The Printer : ")
-        printer.investmentReturn = readLine()?.toInt()!!
-
-        return printer.printerName.isNotEmpty()
+        return true
     }
 
     fun updatePrinterData(printer: PrinterModel) : Boolean {

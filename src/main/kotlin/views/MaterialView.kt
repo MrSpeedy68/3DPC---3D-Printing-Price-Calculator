@@ -13,19 +13,20 @@ class MaterialView {
     }
 
     fun addMaterialData(material : MaterialModel) : Boolean {
-        print("Enter a Material Name : ")
-        material.materialName = readLine()!!
+        if(material.materialName.isEmpty()) {
+            return false
+        }
+        if(material.materialType.isEmpty()) {
+            return false
+        }
+        if(material.materialWeight <= 0) {
+            return false
+        }
+        if(material.materialPrice <= 0) {
+            return false
+        }
 
-        print("Enter a Material Type : ")
-        material.materialType = readLine()!!
-
-        print("Enter Material Weight : ")
-        material.materialWeight = readLine()?.toInt()!!
-
-        print("Enter a Material Price : ")
-        material.materialPrice = readLine()?.toFloat()!!
-
-        return material.materialName.isNotEmpty() && material.materialType.isNotEmpty()
+        return true
     }
 
     fun updateMaterialData(material : MaterialModel) : Boolean {

@@ -15,7 +15,6 @@ class PrinterUIController : Controller() {
     fun add(_name: String, _price : Float, _watts : Int, _investment : Int) {
         var aPrinter = PrinterModel(printerName = _name, printerPrice = _price, wattUsage = _watts, investmentReturn = _investment)
         printers.create(aPrinter)
-        logger.info("Printer Added")
     }
 
     //==============Open============
