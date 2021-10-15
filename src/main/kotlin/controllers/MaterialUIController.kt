@@ -10,6 +10,8 @@ class MaterialUIController : Controller() {
 
     var materials = MaterialJSONStore()
     var logger = KotlinLogging.logger {}
+    var selectedMaterial = MaterialModel()
+
 
     fun add(_name : String, _type : String, _weight : Int, _price : Float){
 
@@ -19,6 +21,10 @@ class MaterialUIController : Controller() {
 
     fun delete(aMat: MaterialModel) {
         materials.delete(aMat)
+    }
+
+    fun update(aMat: MaterialModel, updatedMat: MaterialModel) {
+        materials.update(aMat,updatedMat)
     }
 
 
@@ -38,15 +44,10 @@ class MaterialUIController : Controller() {
 
     fun loadingOpenUpdate() {
         runLater {
-            find(MaterialMenuScreen::class).replaceWith(MaterialListScreen::class,sizeToScene = true, centerOnScreen = true)
+            find(MaterialListScreen::class).replaceWith(MaterialUpdateScreen::class,sizeToScene = true, centerOnScreen = true)
         }
     }
 
-    fun loadingOpenDelete() {
-        runLater {
-            find(MaterialMenuScreen::class).replaceWith(MaterialDeleteScreen::class,sizeToScene = true, centerOnScreen = true)
-        }
-    }
 
 
     //===========Close=============
@@ -68,11 +69,6 @@ class MaterialUIController : Controller() {
         }
     }
 
-    fun loadingCloseDelete() {
-        runLater {
-            find(MaterialDeleteScreen::class).replaceWith(MaterialMenuScreen::class,sizeToScene = true, centerOnScreen = true)
-        }
-    }
 
     fun loadingCloseMenu() {
         runLater {

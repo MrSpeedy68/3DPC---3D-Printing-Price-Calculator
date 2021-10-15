@@ -13,7 +13,7 @@ class PrinterListScreen : View("List of Printers") {
     var selectedPrinter = PrinterModel()
 
     override val root = vbox {
-        setPrefSize(600.0, 200.0)
+        setPrefSize(600.0, 400.0)
         text("List of All Printers")
         tableview(data) {
             readonlyColumn("ID", PrinterModel::printerId)
@@ -37,6 +37,18 @@ class PrinterListScreen : View("List of Printers") {
                 }
             }
         }
+
+        button("Update") {
+            isDefaultButton = true
+            useMaxWidth = true
+            action {
+                runAsyncWithProgress {
+                    printerUIController.selectedPrinter = selectedPrinter
+                    printerUIController.loadingOpenUpdate()
+                }
+            }
+        }
+
 
         button("Close") {
             useMaxWidth = true

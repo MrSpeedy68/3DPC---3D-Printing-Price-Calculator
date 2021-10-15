@@ -60,15 +60,18 @@ class MaterialJSONStore : MaterialStore {
 
     }
 
-    override fun update(material: MaterialModel) {
-        var foundMaterial = findOne(material.materialId!!)
-        if (foundMaterial != null) {
-            foundMaterial.materialName = material.materialName
-            foundMaterial.materialType = material.materialType
-            foundMaterial.materialWeight = material.materialWeight
-            foundMaterial.materialPrice = material.materialPrice
-        }
+    override fun update(material: MaterialModel, updatedMat: MaterialModel) {
+        println("this mat $material")
+        println("updated mat $updatedMat")
+
+        material.materialName = updatedMat.materialName
+        material.materialType = updatedMat.materialType
+        material.materialWeight = updatedMat.materialWeight
+        material.materialPrice = updatedMat.materialPrice
+
         serialize()
+
+        logger.info ("Material Updated!!!")
     }
 
     override fun delete(material: MaterialModel) {

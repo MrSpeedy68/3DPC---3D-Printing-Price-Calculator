@@ -3,6 +3,7 @@ package screens
 import controllers.MenuUIController
 import javafx.application.Platform
 import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
@@ -31,12 +32,13 @@ class MenuScreen : View("3D Printing Price Calculator") {
 
 
     val materials = MaterialJSONStore()
-    var materialData = materials.findAllObservable().observable()
+    var materialData = model.bind { SimpleListProperty(materials.findAllObservable()) }
 
 
 
 
     override val root = form {
+
         setPrefSize(400.0, 600.0)
         fieldset(labelPosition = Orientation.VERTICAL) {
             text("")
@@ -103,12 +105,12 @@ class MenuScreen : View("3D Printing Price Calculator") {
                     runAsyncWithProgress {
                         total.value = menuUIController.loadingCalculation(selectedMaterial.value, selectedPrinter.value, userJSONStore.find(),
                             _modelWeight.intValue(), _hours.intValue(), _minutes.intValue())
-
                     }
                 }
             }
 
             text(total)
+
 
 
             text("")
@@ -129,7 +131,9 @@ class MenuScreen : View("3D Printing Price Calculator") {
     init {
         runAsync {
             printerData = printers.findAll().observable()
-            materialData = materials.findAllObservable().observable()
+            //materialData = materials.findAllObservable().observable()
+
+            println("Menu opened")
         }
     }
 

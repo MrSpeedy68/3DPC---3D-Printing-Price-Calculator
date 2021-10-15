@@ -1,5 +1,7 @@
 package controllers
 
+import javafx.print.Printer
+import models.MaterialModel
 import models.PrinterJSONStore
 import models.PrinterModel
 import mu.KotlinLogging
@@ -12,6 +14,8 @@ class PrinterUIController : Controller() {
     var printers = PrinterJSONStore()
     var logger = KotlinLogging.logger {}
 
+    var selectedPrinter = PrinterModel()
+
     var menuScreen = MenuScreen()
 
     fun add(_name: String, _price : Float, _watts : Int, _investment : Int) {
@@ -23,6 +27,10 @@ class PrinterUIController : Controller() {
 
     fun delete(aPrinter: PrinterModel) {
         printers.delete(aPrinter)
+    }
+
+    fun update(aPrinter: PrinterModel, updatedprinter: PrinterModel) {
+        printers.update(aPrinter,updatedprinter)
     }
 
     //==============Open============
@@ -40,16 +48,9 @@ class PrinterUIController : Controller() {
 
     fun loadingOpenUpdate() {
         runLater {
-            find(PrintersMenuScreen::class).replaceWith(PrinterUpdateScreen::class,sizeToScene = true, centerOnScreen = true)
+            find(PrinterListScreen::class).replaceWith(PrinterUpdateScreen::class,sizeToScene = true, centerOnScreen = true)
         }
     }
-
-    fun loadingOpenDelete() {
-        runLater {
-            find(PrintersMenuScreen::class).replaceWith(PrinterDeleteScreen::class,sizeToScene = true, centerOnScreen = true)
-        }
-    }
-
 
     //===========Close=============
     fun loadingCloseAdd() {
@@ -66,13 +67,7 @@ class PrinterUIController : Controller() {
 
     fun loadingCloseUpdate() {
         runLater {
-            find(MaterialUpdateScreen::class).replaceWith(PrintersMenuScreen::class,sizeToScene = true, centerOnScreen = true)
-        }
-    }
-
-    fun loadingCloseDelete() {
-        runLater {
-            find(PrinterDeleteScreen::class).replaceWith(PrintersMenuScreen::class,sizeToScene = true, centerOnScreen = true)
+            find(PrinterUpdateScreen::class).replaceWith(PrintersMenuScreen::class,sizeToScene = true, centerOnScreen = true)
         }
     }
 

@@ -46,16 +46,6 @@ class PrintersMenuScreen : View("Printer Menu") {
                 }
             }
             text("")
-            button("Delete Printer") {
-                isDefaultButton = true
-                useMaxWidth = true
-                action {
-                    runAsyncWithProgress {
-                        printerUIController.loadingOpenDelete()
-                    }
-                }
-            }
-            text("")
             button("Close") {
                 useMaxWidth = true
                 action {

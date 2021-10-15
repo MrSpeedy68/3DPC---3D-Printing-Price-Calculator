@@ -35,27 +35,6 @@ class MaterialMenuScreen : View("Material Menu") {
                 }
             }
             text("")
-            button("Update Material") {
-
-                isDefaultButton = true
-                useMaxWidth = true
-                action {
-                    runAsyncWithProgress {
-                        materialUIController.loadingOpenUpdate()
-                    }
-                }
-            }
-            text("")
-            button("Delete Material") {
-                isDefaultButton = true
-                useMaxWidth = true
-                action {
-                    runAsyncWithProgress {
-                        materialUIController.loadingOpenDelete()
-                    }
-                }
-            }
-            text("")
             button("Close") {
                 useMaxWidth = true
                 action {

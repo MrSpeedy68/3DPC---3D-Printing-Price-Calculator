@@ -38,6 +38,17 @@ class MaterialListScreen : View("Material List") {
             }
         }
 
+        button("Update") {
+            isDefaultButton = true
+            useMaxWidth = true
+            action {
+                runAsyncWithProgress {
+                    materialUIController.selectedMaterial = selectedMat
+                    materialUIController.loadingOpenUpdate()
+                }
+            }
+        }
+
         button("Close") {
             useMaxWidth = true
             action {

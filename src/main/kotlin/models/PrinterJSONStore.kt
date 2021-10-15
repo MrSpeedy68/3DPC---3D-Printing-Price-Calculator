@@ -59,15 +59,13 @@ class PrinterJSONStore : PrinterStore {
             logger.info("Printer Not Added!!!")
     }
 
-    override fun update(printer: PrinterModel) {
-        var foundPrinter = findOne(printer.printerId!!)
-        if (foundPrinter != null) {
-            foundPrinter.printerName = printer.printerName
-            foundPrinter.printerPrice = printer.printerPrice
-            foundPrinter.wattUsage = printer.wattUsage
-            foundPrinter.investmentReturn = printer.investmentReturn
-        }
+    override fun update(printer: PrinterModel, updatedPrinter: PrinterModel) {
+        printer.printerName = updatedPrinter.printerName
+        printer.printerPrice = updatedPrinter.printerPrice
+        printer.wattUsage = updatedPrinter.wattUsage
+        printer.investmentReturn = updatedPrinter.investmentReturn
         serialize()
+        logger.info("Printer Updated!!!")
     }
 
     override fun delete(printer: PrinterModel) {
