@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleFloatProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
+import javafx.scene.paint.Color
 import models.MaterialModel
 import tornadofx.*
 
@@ -16,8 +17,6 @@ class MaterialUpdateScreen : View("Update Material") {
     val _type = model.bind { SimpleStringProperty() }
     val _weight = model.bind { SimpleIntegerProperty() }
     val _price = model.bind { SimpleFloatProperty() }
-
-    var materialListScreen = MaterialListScreen()
 
     override val root = form {
         setPrefSize(600.0, 400.0)
@@ -40,7 +39,7 @@ class MaterialUpdateScreen : View("Update Material") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        var aMaterial = MaterialModel(materialName = _name.value.toString(), materialType = _type.value.toString(), materialWeight = _weight.value.toInt(), materialPrice = _price.value.toFloat())
+                        val aMaterial = MaterialModel(materialName = _name.value.toString(), materialType = _type.value.toString(), materialWeight = _weight.value.toInt(), materialPrice = _price.value.toFloat())
 
                         materialUIController.update(materialUIController.selectedMaterial,aMaterial)
                         materialUIController.loadingCloseUpdate()
@@ -49,6 +48,9 @@ class MaterialUpdateScreen : View("Update Material") {
             }
             text("")
             button("Close") {
+                style {
+                    backgroundColor += Color.INDIANRED
+                }
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {

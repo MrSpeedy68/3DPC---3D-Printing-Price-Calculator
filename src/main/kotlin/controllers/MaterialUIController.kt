@@ -8,14 +8,13 @@ import tornadofx.*
 
 class MaterialUIController : Controller() {
 
-    var materials = MaterialJSONStore()
-    var logger = KotlinLogging.logger {}
+    val materials = MaterialJSONStore()
     var selectedMaterial = MaterialModel()
 
 
     fun add(_name : String, _type : String, _weight : Int, _price : Float){
 
-        var aMaterial = MaterialModel(materialName = _name, materialType = _type, materialWeight = _weight, materialPrice = _price)
+        val aMaterial = MaterialModel(materialName = _name, materialType = _type, materialWeight = _weight, materialPrice = _price)
         materials.create(aMaterial)
     }
 

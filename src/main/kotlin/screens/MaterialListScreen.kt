@@ -1,6 +1,7 @@
 package screens
 
 import controllers.MaterialUIController
+import javafx.scene.paint.Color
 import tornadofx.*
 import models.MaterialModel
 
@@ -28,6 +29,7 @@ class MaterialListScreen : View("Material List") {
             }
         }
 
+        text("")
         button("Delete") {
             isDefaultButton = true
             useMaxWidth = true
@@ -38,6 +40,7 @@ class MaterialListScreen : View("Material List") {
             }
         }
 
+        text("")
         button("Update") {
             isDefaultButton = true
             useMaxWidth = true
@@ -49,7 +52,11 @@ class MaterialListScreen : View("Material List") {
             }
         }
 
+        text("")
         button("Close") {
+            style {
+                backgroundColor += Color.INDIANRED
+            }
             useMaxWidth = true
             action {
                 runAsyncWithProgress {

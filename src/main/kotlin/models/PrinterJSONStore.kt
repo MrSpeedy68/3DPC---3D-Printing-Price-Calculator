@@ -37,6 +37,7 @@ class PrinterJSONStore : PrinterStore {
         return printers
     }
 
+    //Returns an observable list of all the printers
     override fun findAllObservable() : ObservableList<PrinterModel> {
         var obsList = FXCollections.observableList(printers)
 

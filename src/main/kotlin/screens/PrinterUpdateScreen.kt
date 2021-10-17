@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleFloatProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
+import javafx.scene.paint.Color
 import models.PrinterModel
 import tornadofx.*
 
@@ -41,7 +42,7 @@ class PrinterUpdateScreen : View("Update a Printer") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        var aPrinter = PrinterModel(printerName = _name.value.toString(), printerPrice = _price.value.toFloat(), wattUsage = _watts.value.toInt(), investmentReturn = _investment.value.toInt() )
+                        val aPrinter = PrinterModel(printerName = _name.value.toString(), printerPrice = _price.value.toFloat(), wattUsage = _watts.value.toInt(), investmentReturn = _investment.value.toInt() )
 
                         printerUIController.update(printerUIController.selectedPrinter, aPrinter)
                         printerUIController.loadingCloseUpdate()
@@ -51,6 +52,9 @@ class PrinterUpdateScreen : View("Update a Printer") {
             }
             text("")
             button("Close") {
+                style {
+                    backgroundColor += Color.INDIANRED
+                }
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {

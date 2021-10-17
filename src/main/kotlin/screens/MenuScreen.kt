@@ -2,11 +2,10 @@ package screens
 
 import controllers.MenuUIController
 import javafx.application.Platform
-import javafx.beans.property.SimpleIntegerProperty
-import javafx.beans.property.SimpleListProperty
-import javafx.beans.property.SimpleObjectProperty
-import javafx.beans.property.SimpleStringProperty
+import javafx.beans.property.*
 import javafx.geometry.Orientation
+import javafx.scene.paint.Color
+import javafx.scene.text.Font
 import models.*
 import tornadofx.*
 
@@ -23,23 +22,19 @@ class MenuScreen : View("3D Printing Price Calculator") {
     var selectedPrinter = model.bind { SimpleObjectProperty<PrinterModel>() }
     var selectedMaterial = model.bind { SimpleObjectProperty<MaterialModel>() }
 
-    //var price: Double = 0.0
+    var totalMaterial = model.bind { SimpleStringProperty("Total Material Cost: ") }
+    var totalEnergy = model.bind { SimpleStringProperty("Total Energy Cost: ") }
+    var totalPrinter = model.bind { SimpleStringProperty("Total Printer Cost: ") }
+    var totalPrice = model.bind { SimpleStringProperty("Total Printing Cost: ") }
 
-    var total = model.bind { SimpleStringProperty("Total Price: ") }
+    var printerData = menuUIController.printerData
 
-    val printers = PrinterJSONStore()
-    var printerData = printers.findAll().observable()
-
-
-    val materials = MaterialJSONStore()
-    var materialData = model.bind { SimpleListProperty(materials.findAllObservable()) }
-
-
+    var materialData = menuUIController.materialData
 
 
     override val root = form {
 
-        setPrefSize(400.0, 600.0)
+        setPrefSize(400.0, 700.0)
         fieldset(labelPosition = Orientation.VERTICAL) {
             text("")
             button("Material Menu") {
@@ -77,13 +72,20 @@ class MenuScreen : View("3D Printing Price Calculator") {
 
             //-----------Combo Box----------------\\
             text("")
-//Make a function that refreshes the list on opening the main menu
+            text("Select Material")
+            text("")
+
+////Make a function that refreshes the list on opening the main menu
             combobox(selectedMaterial,materialData) {
             }
 
             text("")
+            text("Select Printer")
+            text("")
+
 //Make a function that refreshes the list on opening the main menu
-            combobox(selectedPrinter, printerData)
+            combobox(selectedPrinter, printerData) {
+            }
 
             //===============Calculation================
             field("Model Weight") {
@@ -103,19 +105,42 @@ class MenuScreen : View("3D Printing Price Calculator") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        total.value = menuUIController.loadingCalculation(selectedMaterial.value, selectedPrinter.value, userJSONStore.find(),
+                        totalPrice.value = menuUIController.loadingTotalCost(selectedMaterial.value, selectedPrinter.value, userJSONStore.find(),
                             _modelWeight.intValue(), _hours.intValue(), _minutes.intValue())
+
+                        totalMaterial.value = menuUIController.loadingTotalMaterialCost(selectedMaterial.value,_modelWeight.intValue(), userJSONStore.find())
+
+                        totalEnergy.value = menuUIController.loadingTotalEnergyCost(selectedPrinter.value,_hours.intValue(),_minutes.intValue(), userJSONStore.find())
+
+                        totalPrinter.value = menuUIController.loadingTotalPrinterCost(selectedPrinter.value, _hours.intValue(), _minutes.intValue(), userJSONStore.find())
                     }
                 }
             }
 
-            text(total)
+            text("")
+            text("")
+            text("")
 
-
+            text(totalMaterial) {
+                font = Font(15.0)
+            }
+            text(totalEnergy) {
+                font = Font(15.0)
+            }
+            text(totalPrinter) {
+                font = Font(15.0)
+            }
+            text(totalPrice) {
+                font = Font(15.0)
+            }
 
             text("")
+            text("")
+            text("")
             button("Exit") {
-
+                style {
+                    backgroundColor += Color.INDIANRED
+                }
                 isDefaultButton = true
                 useMaxWidth = true
                 action {
@@ -127,16 +152,4 @@ class MenuScreen : View("3D Printing Price Calculator") {
             }
         }
     }
-
-    init {
-        runAsync {
-            printerData = printers.findAll().observable()
-            //materialData = materials.findAllObservable().observable()
-
-            println("Menu opened")
-        }
-    }
-
-
-
 }

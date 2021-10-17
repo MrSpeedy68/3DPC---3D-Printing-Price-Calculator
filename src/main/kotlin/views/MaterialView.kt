@@ -4,14 +4,7 @@ import models.MaterialModel
 import models.MaterialJSONStore
 
 class MaterialView {
-
-    fun showMaterial(material: MaterialModel) {
-        if(material != null)
-            println("Material Details [ $material ]")
-        else
-            println("Material Not Found...")
-    }
-
+    //Check if all material data is valid before adding
     fun addMaterialData(material : MaterialModel) : Boolean {
         if(material.materialName.isEmpty()) {
             return false
@@ -29,6 +22,7 @@ class MaterialView {
         return true
     }
 
+    //Check if all updated material data is valid before adding
     fun updateMaterialData(material : MaterialModel) : Boolean {
         println("Update Material")
         println()
@@ -59,22 +53,4 @@ class MaterialView {
         return false
     }
 
-    fun listAllMaterials(materials : MaterialJSONStore) {
-        println("List All Materials")
-        println()
-        materials.logAll()
-        println()
-    }
-
-    fun getId() : Long {
-        var strId : String? // String to hold user input
-        var searchId : Long // Long to hold converted Id
-        print("Enter id to Search/Update : ")
-        strId = readLine()!!
-        searchId = if (strId.toLongOrNull() != null && !strId.isEmpty())
-            strId.toLong()
-        else
-            -9
-        return searchId
-    }
 }

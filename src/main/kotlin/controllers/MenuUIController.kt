@@ -1,9 +1,7 @@
 package controllers
 
-import javafx.beans.property.SimpleStringProperty
-import models.MaterialModel
-import models.PrinterModel
-import models.UserModel
+import javafx.collections.ObservableList
+import models.*
 import mu.KotlinLogging
 import tornadofx.*
 import screens.MaterialMenuScreen
@@ -14,9 +12,15 @@ import screens.UserScreen
 class MenuUIController : Controller() {
 
     val logger = KotlinLogging.logger {}
-    var totalPrintCost: Float = 0.0f
+
     var calculationController = CalculationController()
-    var totalText = SimpleStringProperty("Total Printing Costs : $totalPrintCost")
+
+    val printers = PrinterJSONStore()
+    var printerData = printers.findAllObservable()
+
+    val materials = MaterialJSONStore()
+    var materialData = materials.findAllObservable()
+
 
     init {
         logger.info { "Launching 3D Printing Price Calculator TornadoFX UI App" }
@@ -40,10 +44,34 @@ class MenuUIController : Controller() {
         }
     }
 
-    fun loadingCalculation(aMat: MaterialModel, aPrinter: PrinterModel, aUser: UserModel, modelWeight: Int, hours: Int, minutes: Int) : String {
-        totalPrintCost = calculationController.TotalPrintCost(aMat, aPrinter, aUser,
+    fun loadingTotalCost(aMat: MaterialModel, aPrinter: PrinterModel, aUser: UserModel, modelWeight: Int, hours: Int, minutes: Int) : String {
+        var totalPrintCost: Float = calculationController.TotalPrintCost(aMat, aPrinter, aUser,
             modelWeight, hours, minutes)
 
-         return "Total Printing Costs : $totalPrintCost"
+         return "Total Printing Cost : ${aUser.currency} $totalPrintCost"
+    }
+
+    fun loadingTotalMaterialCost(aMat: MaterialModel, modelWeight: Int, aUser: UserModel) :String {
+        var totalMaterialCost: Float = calculationController.TotalFilamentCost(aMat,modelWeight)
+
+        return "Total Material Cost : ${aUser.currency} $totalMaterialCost"
+    }
+
+    fun loadingTotalEnergyCost(aPrinter: PrinterModel, hours: Int, minutes: Int, aUser: UserModel) :String {
+        var totalEnergyCost: Float = calculationController.ElectricityCost(aPrinter,hours,minutes,aUser)
+
+        return "Total Energy Cost : ${aUser.currency} $totalEnergyCost"
+    }
+
+    fun loadingTotalPrinterCost(aPrinter: PrinterModel,hours: Int, minutes: Int, aUser: UserModel) : String {
+        var totalPrinterCost: Float = calculationController.PrinterCosts(aPrinter, hours, minutes)
+
+        return "Total Printer Cost : ${aUser.currency} $totalPrinterCost"
+    }
+
+    fun reloadCombos() : ObservableList<PrinterModel> {
+        printerData = printers.findAllObservable()
+
+        return printerData
     }
 }

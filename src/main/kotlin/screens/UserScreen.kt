@@ -4,6 +4,7 @@ import controllers.UserUIController
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
+import javafx.scene.paint.Color
 import tornadofx.*
 
 class UserScreen : View("User Settings") {
@@ -36,12 +37,15 @@ class UserScreen : View("User Settings") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        userUIController.add(_name.value.toString(),_labour.value.toDouble(),_energy.value.toDouble(),_currency.value.toString())
+                        userUIController.add(_name.value.toString(),_labour.value.toDouble(),_energy.value.toDouble(),_currency.value.toString()) //Take the Simple Property value and add it
                     }
                 }
             }
             text("")
             button("Close") {
+                style {
+                    backgroundColor += Color.INDIANRED
+                }
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {

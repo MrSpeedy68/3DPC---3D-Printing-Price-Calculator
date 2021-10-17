@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleFloatProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
+import javafx.scene.paint.Color
 import tornadofx.*
 
 class MaterialAddScreen : View("Add a Material"){
@@ -38,11 +39,15 @@ class MaterialAddScreen : View("Add a Material"){
                 action {
                     runAsyncWithProgress {
                         materialUIController.add(_name.value.toString(), _type.value.toString(), _weight.value.toInt(), _price.value.toFloat())
+                        materialUIController.loadingCloseAdd()
                     }
                 }
             }
             text("")
             button("Close") {
+                style {
+                    backgroundColor += Color.INDIANRED
+                }
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {

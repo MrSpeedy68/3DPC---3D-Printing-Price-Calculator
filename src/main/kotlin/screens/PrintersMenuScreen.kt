@@ -2,6 +2,7 @@ package screens
 
 import controllers.PrinterUIController
 import javafx.geometry.Orientation
+import javafx.scene.paint.Color
 import tornadofx.*
 
 class PrintersMenuScreen : View("Printer Menu") {
@@ -35,18 +36,10 @@ class PrintersMenuScreen : View("Printer Menu") {
                 }
             }
             text("")
-            button("Update Printer") {
-
-                isDefaultButton = true
-                useMaxWidth = true
-                action {
-                    runAsyncWithProgress {
-                        printerUIController.loadingOpenUpdate()
-                    }
-                }
-            }
-            text("")
             button("Close") {
+                style {
+                    backgroundColor += Color.INDIANRED
+                }
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {

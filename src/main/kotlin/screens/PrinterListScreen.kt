@@ -1,6 +1,7 @@
 package screens
 
 import controllers.PrinterUIController
+import javafx.scene.paint.Color
 import models.PrinterModel
 import tornadofx.*
 
@@ -22,12 +23,14 @@ class PrinterListScreen : View("List of Printers") {
             readonlyColumn("WATT USAGE", PrinterModel::wattUsage)
             readonlyColumn("RETURN ON INVESTMENT", PrinterModel::investmentReturn)
 
+            //Double click to select printer
             onUserSelect { aPrinter ->
                 println(aPrinter)
                 selectedPrinter = aPrinter
             }
         }
 
+        text("")
         button("Delete") {
             isDefaultButton = true
             useMaxWidth = true
@@ -38,6 +41,7 @@ class PrinterListScreen : View("List of Printers") {
             }
         }
 
+        text("")
         button("Update") {
             isDefaultButton = true
             useMaxWidth = true
@@ -49,8 +53,11 @@ class PrinterListScreen : View("List of Printers") {
             }
         }
 
-
+        text("")
         button("Close") {
+            style {
+                backgroundColor += Color.INDIANRED
+            }
             useMaxWidth = true
             action {
                 runAsyncWithProgress {

@@ -7,7 +7,7 @@ import models.UserModel
 class CalculationController {
 
 
-    //Add A Markup % ontop of the material
+    //Calculates the total filament cost by getting cost per gram and multiplying by total grams used
     fun TotalFilamentCost(aMat: MaterialModel, modelWeight: Int) : Float {
         var pricePerGram = aMat.materialPrice / aMat.materialWeight
 
@@ -20,6 +20,7 @@ class CalculationController {
         return totalFilamentCost
     }
 
+    //Calculates the electricity cost by converting watts into Kwh and multiplying by how many hours of printing was done
     fun ElectricityCost(aPrinter: PrinterModel, hours: Int, minutes: Int, aUser: UserModel) : Float {
 
         var printerkwh : Float = aPrinter.wattUsage.toFloat()
@@ -33,6 +34,7 @@ class CalculationController {
         return totalElectricityCost
     }
 
+    //Gets the investment return in months of the printer and turns it into hours then multiplying by hours of printing
     fun PrinterCosts(aPrinter: PrinterModel, hours: Int, minutes: Int) : Float {
         var monthsToHours = aPrinter.investmentReturn * 720 //Turn Months into days x30 and days into hours x24 which equals 720
         var printerCosts: Float = ((aPrinter.printerPrice / monthsToHours) * GetTimeInHoursDecimal(hours, minutes)).toFloat()
@@ -44,6 +46,7 @@ class CalculationController {
         return  printerCosts
     }
 
+    //Total cost combines all the calculations to get a total cost for printing
     fun TotalPrintCost(aMat: MaterialModel, aPrinter: PrinterModel, aUser: UserModel, modelWeight: Int, hours: Int, minutes: Int) : Float {
         var totalPrintCost = TotalFilamentCost(aMat,modelWeight) + ElectricityCost(aPrinter, hours, minutes, aUser) + PrinterCosts(aPrinter, hours, minutes)
 
@@ -55,6 +58,8 @@ class CalculationController {
     }
 
 //Helper Functions
+
+    //Turns hours and mins into a single decimal
     fun GetTimeInHoursDecimal(hours: Int, minutes: Int) : Float {
         var tempHours : Float = (minutes / 60).toFloat()
 

@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleFloatProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
+import javafx.scene.paint.Color
 import tornadofx.*
 
 class PrinterAddScreen : View("Add a Printer") {
@@ -40,12 +41,16 @@ class PrinterAddScreen : View("Add a Printer") {
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {
-                        printerUIController.add(_name.value.toString(), _price.value.toFloat(), _watts.value.toInt(), _investment.value.toInt())
+                        printerUIController.add(_name.value.toString(), _price.value.toFloat(), _watts.value.toInt(), _investment.value.toInt()) //Take simple property value and add it
+                        printerUIController.loadingCloseAdd()
                     }
                 }
             }
             text("")
             button("Close") {
+                style {
+                    backgroundColor += Color.INDIANRED
+                }
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {

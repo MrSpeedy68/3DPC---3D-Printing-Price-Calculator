@@ -2,6 +2,7 @@ package screens
 
 import controllers.MaterialUIController
 import javafx.geometry.Orientation
+import javafx.scene.paint.Color
 import tornadofx.*
 
 class MaterialMenuScreen : View("Material Menu") {
@@ -36,6 +37,9 @@ class MaterialMenuScreen : View("Material Menu") {
             }
             text("")
             button("Close") {
+                style {
+                    backgroundColor += Color.INDIANRED
+                }
                 useMaxWidth = true
                 action {
                     runAsyncWithProgress {

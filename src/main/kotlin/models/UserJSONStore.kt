@@ -23,6 +23,7 @@ class UserJSONStore : UserStore{
         }
     }
 
+    //There is only a single user so the main user is returned
     override fun find() : UserModel {
         return mainUser
     }
