@@ -15,8 +15,7 @@ class PrinterViewTest {
                printerName = "Ender 3",
                printerPrice = 150f,
                wattUsage = 100,
-               investmentReturn = 24
-            )
+               investmentReturn = 24)
         ))
     }
 
@@ -102,13 +101,5 @@ class PrinterViewTest {
                 investmentReturn = 0
             )
         ))
-    }
-
-    @Test
-    fun addPrinterData() {
-    }
-
-    @Test
-    fun updatePrinterData() {
     }
 }
