@@ -10,12 +10,13 @@ import mu.KotlinLogging
 import org.wit.placemark.console.helpers.*
 import views.MaterialView
 import java.util.*
+import kotlin.collections.ArrayList
 
 private val logger = KotlinLogging.logger {}
 
 val JSON_FILE_MATERIAL = "materials.json"
 val gsonBuilder_Mat = GsonBuilder().setPrettyPrinting().create()
-val listTypeMat = object : TypeToken<java.util.ArrayList<MaterialModel>>() {}.type
+val listTypeMat = object : TypeToken<ArrayList<MaterialModel>>() {}.type
 
 val materialView = MaterialView()
 
@@ -37,14 +38,19 @@ class MaterialJSONStore : MaterialStore {
         return materials
     }
 
+
+    override fun size(): Int {
+        return materials.size - 1
+    }
+
     override fun findAllObservable() : ObservableList<MaterialModel> {
-        var obsList = FXCollections.observableList(materials)
+        val obsList = FXCollections.observableList(materials)
 
         return obsList
     }
 
     override fun findOne(id: Long) : MaterialModel? {
-        var foundMaterial: MaterialModel? = materials.find { m -> m.materialId == id }
+        val foundMaterial: MaterialModel? = materials.find { m -> m.materialId == id }
         return foundMaterial
     }
 
@@ -78,6 +84,11 @@ class MaterialJSONStore : MaterialStore {
         materials.remove(material)
         serialize()
         logger.info("Material Deleted!!!")
+    }
+
+    override fun search(name: String) : MaterialModel? {
+        val foundMaterial: MaterialModel? = materials.find { n -> n.materialName.uppercase() == name.uppercase() }
+        return foundMaterial
     }
 
     internal fun logAll() {

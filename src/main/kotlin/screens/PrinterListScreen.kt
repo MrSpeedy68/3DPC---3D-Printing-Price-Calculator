@@ -1,6 +1,8 @@
 package screens
 
 import controllers.PrinterUIController
+import javafx.beans.property.SimpleStringProperty
+import javafx.geometry.Orientation
 import javafx.scene.paint.Color
 import models.PrinterModel
 import tornadofx.*
@@ -8,13 +10,39 @@ import tornadofx.*
 class PrinterListScreen : View("List of Printers") {
 
     val printerUIController : PrinterUIController by inject()
+    val model = ViewModel()
+
     val tableContent = printerUIController.printers.findAll()
     val data = tableContent.observable()
 
+    var searchResult = model.bind { SimpleStringProperty("None") }
+
     var selectedPrinter = PrinterModel()
 
-    override val root = vbox {
-        setPrefSize(600.0, 400.0)
+    var searchString = model.bind { SimpleStringProperty("Search Here") }
+
+    override val root = form {
+        setPrefSize(600.0, 600.0)
+        fieldset(labelPosition = Orientation.VERTICAL) {
+
+            field("Search by Name") {
+                textfield(searchString)
+            }
+
+            button("Search") {
+                isDefaultButton = true
+                action {
+                    println(printerUIController.printers.search(searchString.value))
+                    searchResult.value = printerUIController.printers.search(searchString.value).toString()
+                }
+            }
+
+            text(searchResult) {
+
+            }
+        }
+
+
         text("List of All Printers")
         tableview(data) {
             readonlyColumn("ID", PrinterModel::printerId)
@@ -23,10 +51,11 @@ class PrinterListScreen : View("List of Printers") {
             readonlyColumn("WATT USAGE", PrinterModel::wattUsage)
             readonlyColumn("RETURN ON INVESTMENT", PrinterModel::investmentReturn)
 
-            //Double click to select printer
-            onUserSelect { aPrinter ->
+            // click to select printer
+            onUserSelect(1) { aPrinter ->
                 println(aPrinter)
                 selectedPrinter = aPrinter
+                refresh()
             }
         }
 

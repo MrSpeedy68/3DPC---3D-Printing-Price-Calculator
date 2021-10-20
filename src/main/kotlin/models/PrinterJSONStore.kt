@@ -75,6 +75,11 @@ class PrinterJSONStore : PrinterStore {
         logger.info("Printer Deleted!!!")
     }
 
+    override fun search(name: String) : PrinterModel? {
+        val foundPrinter: PrinterModel? = printers.find { n -> n.printerName.uppercase() == name.uppercase() }
+        return foundPrinter
+    }
+
     internal fun logAll() {
         printers.forEach { logger.info("${it}") }
     }

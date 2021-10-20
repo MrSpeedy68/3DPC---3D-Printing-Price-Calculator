@@ -9,4 +9,5 @@ interface PrinterStore {
     fun create(printer: PrinterModel)
     fun update(printer: PrinterModel, updatedPrinter: PrinterModel)
     fun delete(printer: PrinterModel)
+    fun search(name: String) : PrinterModel?
 }

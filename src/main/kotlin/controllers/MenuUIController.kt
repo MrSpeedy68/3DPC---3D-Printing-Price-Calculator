@@ -1,5 +1,6 @@
 package controllers
 
+import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import models.*
 import mu.KotlinLogging
@@ -19,7 +20,7 @@ class MenuUIController : Controller() {
     var printerData = printers.findAllObservable()
 
     val materials = MaterialJSONStore()
-    var materialData = materials.findAllObservable()
+    var materialData = materials.findAll()
 
 
     init {

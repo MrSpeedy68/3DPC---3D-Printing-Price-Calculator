@@ -3,6 +3,7 @@ package screens
 import controllers.MenuUIController
 import javafx.application.Platform
 import javafx.beans.property.*
+import javafx.collections.FXCollections
 import javafx.geometry.Orientation
 import javafx.scene.paint.Color
 import javafx.scene.text.Font
@@ -29,7 +30,8 @@ class MenuScreen : View("3D Printing Price Calculator") {
 
     var printerData = menuUIController.printerData
 
-    var materialData = menuUIController.materialData
+    private val materialContent = menuUIController.materials.findAll()
+    var materialData = materialContent
 
 
     override val root = form {
@@ -138,9 +140,6 @@ class MenuScreen : View("3D Printing Price Calculator") {
             text("")
             text("")
             button("Exit") {
-                style {
-                    backgroundColor += Color.INDIANRED
-                }
                 isDefaultButton = true
                 useMaxWidth = true
                 action {
@@ -148,6 +147,9 @@ class MenuScreen : View("3D Printing Price Calculator") {
                         Platform.exit();
                         System.exit(0);
                     }
+                }
+                style {
+                    backgroundColor += Color.INDIANRED
                 }
             }
         }

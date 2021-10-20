@@ -2,7 +2,6 @@ package controllers
 
 import models.MaterialJSONStore
 import models.MaterialModel
-import mu.KotlinLogging
 import screens.*
 import tornadofx.*
 
