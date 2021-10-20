@@ -29,9 +29,7 @@ class MenuScreen : View("3D Printing Price Calculator") {
     var totalPrice = model.bind { SimpleStringProperty("Total Printing Cost: ") }
 
     var printerData = menuUIController.printerData
-
-    private val materialContent = menuUIController.materials.findAll()
-    var materialData = materialContent
+    var materialData = menuUIController.materialData
 
 
     override val root = form {

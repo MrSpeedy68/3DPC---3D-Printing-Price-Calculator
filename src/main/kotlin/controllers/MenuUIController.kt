@@ -20,7 +20,7 @@ class MenuUIController : Controller() {
     var printerData = printers.findAllObservable()
 
     val materials = MaterialJSONStore()
-    var materialData = materials.findAll()
+    var materialData = materials.findAllObservable()
 
 
     init {

@@ -10,19 +10,28 @@ class MaterialUIController : Controller() {
     val materials = MaterialJSONStore()
     var selectedMaterial = MaterialModel()
 
+    var menuScreen = MenuScreen()
+
 
     fun add(_name : String, _type : String, _weight : Int, _price : Float){
 
         val aMaterial = MaterialModel(materialName = _name, materialType = _type, materialWeight = _weight, materialPrice = _price)
         materials.create(aMaterial)
+
+        menuScreen.materialData.add(aMaterial)
     }
 
     fun delete(aMat: MaterialModel) {
         materials.delete(aMat)
+
+        menuScreen.materialData.remove(aMat)
     }
 
     fun update(aMat: MaterialModel, updatedMat: MaterialModel) {
         materials.update(aMat,updatedMat)
+
+        menuScreen.materialData.remove(aMat)
+        menuScreen.materialData.add(updatedMat)
     }
 
 

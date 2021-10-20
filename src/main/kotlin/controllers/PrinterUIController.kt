@@ -26,10 +26,15 @@ class PrinterUIController : Controller() {
 
     fun delete(aPrinter: PrinterModel) {
         printers.delete(aPrinter)
+
+        menuScreen.printerData.remove(aPrinter)
     }
 
     fun update(aPrinter: PrinterModel, updatedprinter: PrinterModel) {
         printers.update(aPrinter,updatedprinter)
+
+        menuScreen.printerData.remove(aPrinter)
+        menuScreen.printerData.add(updatedprinter)
     }
 
     //==============Open============

@@ -36,7 +36,7 @@ class PrinterUpdateScreen : View("Update a Printer") {
             field("Investment Return on Printer in Months") {
                 textfield(_investment).required()
             }
-            button("Add") {
+            button("Update") {
                 enableWhen(model.valid)
                 isDefaultButton = true
                 useMaxWidth = true
