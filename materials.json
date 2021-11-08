@@ -1,0 +1,16 @@
+[
+  {
+    "materialId": 1428214215959727696,
+    "materialName": "Dark Purple",
+    "materialType": "PLA",
+    "materialWeight": 750,
+    "materialPrice": 12.0
+  },
+  {
+    "materialId": 7730094398673874313,
+    "materialName": "Green",
+    "materialType": "PLA",
+    "materialWeight": 1000,
+    "materialPrice": 12.0
+  }
+]

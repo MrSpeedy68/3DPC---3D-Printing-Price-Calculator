@@ -1,34 +1,28 @@
 package views
 
 import models.MaterialModel
-import MaterialMemStore
 import models.MaterialJSONStore
 
 class MaterialView {
-
-    fun showMaterial(material: MaterialModel) {
-        if(material != null)
-            println("Material Details [ $material ]")
-        else
-            println("Material Not Found...")
-    }
-
+    //Check if all material data is valid before adding
     fun addMaterialData(material : MaterialModel) : Boolean {
-        print("Enter a Material Name : ")
-        material.materialName = readLine()!!
+        if(material.materialName.isEmpty()) {
+            return false
+        }
+        if(material.materialType.isEmpty()) {
+            return false
+        }
+        if(material.materialWeight <= 0) {
+            return false
+        }
+        if(material.materialPrice <= 0) {
+            return false
+        }
 
-        print("Enter a Material Type : ")
-        material.materialType = readLine()!!
-
-        print("Enter Material Weight : ")
-        material.materialWeight = readLine()?.toInt()!!
-
-        print("Enter a Material Price : ")
-        material.materialPrice = readLine()?.toDouble()!!
-
-        return material.materialName.isNotEmpty() && material.materialType.isNotEmpty()
+        return true
     }
 
+    //Check if all updated material data is valid before adding
     fun updateMaterialData(material : MaterialModel) : Boolean {
         println("Update Material")
         println()
@@ -36,7 +30,7 @@ class MaterialView {
         var tempMatName: String?
         var tempMatType: String?
         var tempMatWeight: Int?
-        var tempMatPrice: Double?
+        var tempMatPrice: Float?
 
         if(material != null) {
             println("Enter a new Name for [ ${material.materialName} ] : ")
@@ -46,7 +40,7 @@ class MaterialView {
             println("Enter a new Weight for [ ${material.materialWeight} ] : ")
             tempMatWeight = readLine()?.toInt()!!
             println("Enter a new Price for [ ${material.materialPrice} ] : ")
-            tempMatPrice= readLine()?.toDouble()!!
+            tempMatPrice= readLine()?.toFloat()!!
 
             if(tempMatName.isNotEmpty() && tempMatType.isNotEmpty()) {
                 material.materialName = tempMatName
@@ -59,22 +53,4 @@ class MaterialView {
         return false
     }
 
-    fun listAllMaterials(materials : MaterialJSONStore) {
-        println("List All Materials")
-        println()
-        materials.logAll()
-        println()
-    }
-
-    fun getId() : Long {
-        var strId : String? // String to hold user input
-        var searchId : Long // Long to hold converted Id
-        print("Enter id to Search/Update : ")
-        strId = readLine()!!
-        searchId = if (strId.toLongOrNull() != null && !strId.isEmpty())
-            strId.toLong()
-        else
-            -9
-        return searchId
-    }
 }
